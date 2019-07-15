@@ -13,7 +13,6 @@ package com.xueying.seeker.auth;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * AuthServer的启动类
@@ -22,7 +21,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @date 2019-07-15
  */
 @SpringBootApplication
-@EnableFeignClients
 @EnableDiscoveryClient
 public class AuthServerApplication {
     /**
