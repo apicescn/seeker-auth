@@ -1,0 +1,11 @@
+   _____           __                ___         __  __       _____
+  / ___/___  ___  / /_____  _____   /   | __  __/ /_/ /_     / ___/___  ______   _____  _____
+  \__ \/ _ \/ _ \/ //_/ _ \/ ___/  / /| |/ / / / __/ __ \    \__ \/ _ \/ ___/ | / / _ \/ ___/
+ ___/ /  __/  __/ ,< /  __/ /     / ___ / /_/ / /_/ / / /   ___/ /  __/ /   | |/ /  __/ /
+/____/\___/\___/_/|_|\___/_/     /_/  |_\__,_/\__/_/ /_/   /____/\___/_/    |___/\___/_/
+
+
+ascii generator: http://patorjk.com/software/taag/#p=display&f=Slant&t=Seeker%20Auth%20Server
+
+ ${Ansi.BRIGHT_GREEN}:: App Version ::		${Ansi.BRIGHT_CYAN}${info.version}
+ ${Ansi.DEFAULT}:: Spring Boot Version ::	${spring-boot.formatted-version}
