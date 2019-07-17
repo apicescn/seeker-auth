@@ -59,6 +59,7 @@
     <modules>
         <module>seeker-auth-server</module>
         <module>seeker-auth-client</module>
+        <module>seeker-auth-common</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -75,6 +76,11 @@
             <dependency>
                 <groupId>com.xueying.seeker</groupId>
                 <artifactId>seeker-auth-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xueying.seeker</groupId>
+                <artifactId>seeker-auth-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- guava -->
@@ -131,17 +137,17 @@
                 <version>${spring.boot.version}</version>
             </dependency>
             <!--nacos config-->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-<!--                <version>${spring-cloud-starter-alibaba-nacos.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${spring-cloud-starter-alibaba-nacos.version}</version>
+            </dependency>
             <!--nacos discovery-->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-<!--                <version>${spring-cloud-starter-alibaba-nacos.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring-cloud-starter-alibaba-nacos.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-test</artifactId>
