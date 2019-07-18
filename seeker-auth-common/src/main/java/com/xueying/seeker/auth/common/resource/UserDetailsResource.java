@@ -31,7 +31,7 @@ public interface UserDetailsResource {
      *  @throws UsernameNotFoundException 用户不存在异常信息
      */
 
-    @RequestLine("POST /api/user/details/{username}")
+    @RequestLine("POST /api/user/details")
     @Headers("Content-Type: application/x-www-form-urlencoded")
     UserInfo loadUserByUsername(@Param("username") String username) throws UsernameNotFoundException;
 }
