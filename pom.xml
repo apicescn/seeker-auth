@@ -165,6 +165,12 @@
                 <artifactId>feign-jackson</artifactId>
                 <version>${feign.version}</version>
             </dependency>
+            <!-- spring-boot-starter-data-redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-redis.version}</version>
+            </dependency>
             <!-- httpclient -->
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>

@@ -41,7 +41,7 @@ public interface OauthServerClient {
      * @return TokenDTO 返回token数据
      */
     @RequestMapping(method = RequestMethod.POST, value = "/uaa/oauth/token",
-        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     TokenDTO token(@RequestHeader("Authorization") String basicAuth, @RequestParam("username") String username,
                    @RequestParam("password") String password, @RequestParam("grant_type") String grantType);
 }
