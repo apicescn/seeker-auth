@@ -11,7 +11,13 @@
 package com.xueying.seeker.auth.service;
 
 import com.xueying.seeker.auth.common.entity.UserInfo;
+import com.xueying.seeker.auth.common.resource.UserDetailsResource;
+import com.xueying.seeker.auth.config.feign.UserDetailsClientProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * UserDetailsService的实现
@@ -31,6 +38,12 @@ import java.util.ArrayList;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     /**
+     * 获取用户信息接口
+     */
+    @Autowired
+    private Map<String, UserDetailsResource> userDetailsResources;
+
+    /**
      * 根据用户名查询用户信息
      *
      * @param username 用户名
@@ -39,9 +52,38 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 获取client_id
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String clientId;
+        // 当授权模式为authorization_code,authentication为null,这时给设置一个默认的clientId用于对应一个获取用户信息服务
+        if (authentication != null) {
+            clientId = ((User)authentication.getPrincipal()).getUsername();
+        } else {
+            clientId = UserDetailsClientProperties.DEFAULT_CLIENT_ID;
+        }
+        // 获取用户
+        UserInfo userInfo;
+        UserDetailsResource resource = userDetailsResources.get(clientId);
+        log.info("resource-->" + resource);
+        try {
+            userInfo = resource.loadUserByUsername(username);
+            log.info("userInfo--->" + userInfo);
+        } catch (Exception e) {
+            log.error("loadUserByUsername(username={}) 用户信息获取异常 Exception. ErrorMsg:{}",
+                    username, e.getMessage(), e);
+        }
+        // 获取用户权限
+        // List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        // if (StringUtils.isNoneEmpty(user.getAuthorities())) {
+        // Stream.of(user.getAuthorities().split(","))
+        // .forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
+        // }
+//        if (userInfo == null) {
+//            throw new UsernameNotFoundException("Not found any user for username[" + username + "]");
+//        }
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String finalPassword = bCryptPasswordEncoder.encode("123456");
-        UserInfo userInfo = new UserInfo("superadmin", finalPassword, true, new ArrayList());
+        userInfo = new UserInfo("superadmin", finalPassword, true, new ArrayList());
         return userInfo;
 
     }
