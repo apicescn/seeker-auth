@@ -23,7 +23,7 @@ spring:
 
 #  开启flyway
   flyway:
-    enabled: true
+    enabled: false
     url: jdbc:mysql://${maven_docker.ip}:3306/auth?useUnicode=true&characterEncoding=utf-8
     encoding: UTF-8
     user: root
@@ -36,33 +36,13 @@ security:
   oauth2:
     resource:
       prefer-token-info: true
+      user-info-uri: http://127.0.0.1:7001/seeker/api/user/userInfo
     client:
       clientId: admin
       clientSecret: 7a57a5a743894a0e
       access-token-uri: http://127.0.0.1:7777/uaa/oauth/token
       user-authorization-uri: http://127.0.0.1:7777/uaa/oauth/authorize
-      grant-type: client_credentials
-
-# swagger配置
-#swagger:
-#  enabled: true
-#  api-info:
-#    appName: 'whyt-seeker'
-#    title: 'whyt-seeker'
-#    description: '雪影物联网探索者平台'
-#    license: ''
-#    license-url: ''
-#    version: 'v1.0'
-#    contact-name: '雪影实业'
-#    contact-url: 'http://www.whxiuying.com'
-#    contact-email: 'company@whxiuying.com'
-#    terms-of-service-url: 'http://www.whxiuying.com'
-#    base-package: 'com.xiuying.seeker.auth.web.controller'
-#    oauth:
-#      clientId: test
-#      clientSecret: test
-#      access-token-uri: http://127.0.0.1:7777/uaa/oauth/token
-#      user-authorization-uri: http://127.0.0.1:7777/uaa/oauth/authorize
+      grant-type: client_credentials,password
 
 userdetails:
   clients:
@@ -75,7 +55,7 @@ userdetails:
 
 feign:
   okhttp:
-    enabled: false
+    enabled: true
     httpclient:
       enabled: true
       maxConnections: 20480
@@ -88,5 +68,6 @@ feign:
 logging:
   level:
     root: INFO
+    org.springframework.jdbc: DEBUG
     org.springframework.security: DEBUG
     com.seeker: DEBUG

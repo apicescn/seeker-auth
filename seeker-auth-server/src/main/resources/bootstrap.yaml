@@ -18,14 +18,17 @@ spring:
     name: seeker-auth-server
   profiles:
     active: ${maven_spring.profiles.active}
-#  cloud:
-#    config:
-#      uri: http://127.0.0.1:8761/config
-#      username: admin
-#      password: admin
-#      fail-fast: true
-#    bus:
-#      enabled: false
+  #nacos配置
+  cloud:
+    nacos:
+      config:
+        enabled: false
+        server-addr: ${maven_nacos.ip}:${maven_nacos.port}
+        group: DEV_GROUP
+        file-extension: yaml
+      discovery:
+        enabled: true
+        server-addr: ${maven_nacos.ip}:${maven_nacos.port}
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
