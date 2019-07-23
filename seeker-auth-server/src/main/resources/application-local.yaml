@@ -53,17 +53,6 @@ security:
 #    terms-of-service-url: 'http://www.whxiuying.com'
 #    base-package: 'com.xiuying.seeker.auth.web.controller'
 
-feign:
-  okhttp:
-    enabled: false
-    httpclient:
-      enabled: true
-      maxConnections: 20480
-      maxConnectionsPerRoute: 512
-      timeToLive: 60
-      connectionTimeout: 10000
-      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0'
-
 # 日志
 logging:
   level:
