@@ -21,10 +21,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -62,28 +60,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             clientId = UserDetailsClientProperties.DEFAULT_CLIENT_ID;
         }
         // 获取用户
-        UserInfo userInfo;
         UserDetailsResource resource = userDetailsResources.get(clientId);
-        log.info("resource-->" + resource);
-        try {
-            userInfo = resource.loadUserByUsername(username);
-            log.info("userInfo--->" + userInfo);
-        } catch (Exception e) {
-            log.error("loadUserByUsername(username={}) 用户信息获取异常 Exception. ErrorMsg:{}",
-                    username, e.getMessage(), e);
-        }
+        UserInfo userInfo = resource.loadUserByUsername(username);
         // 获取用户权限
         // List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         // if (StringUtils.isNoneEmpty(user.getAuthorities())) {
         // Stream.of(user.getAuthorities().split(","))
         // .forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
         // }
-//        if (userInfo == null) {
-//            throw new UsernameNotFoundException("Not found any user for username[" + username + "]");
-//        }
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String finalPassword = bCryptPasswordEncoder.encode("123456");
-        userInfo = new UserInfo("superadmin", finalPassword, true, new ArrayList());
+        if (userInfo == null) {
+            throw new UsernameNotFoundException("Not found any user for username[" + username + "]");
+        }
         return userInfo;
 
     }
