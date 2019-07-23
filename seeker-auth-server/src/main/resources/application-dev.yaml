@@ -36,22 +36,6 @@ security:
   oauth2:
     resource:
       prefer-token-info: true
-      user-info-uri: http://127.0.0.1:7001/seeker/api/user/userInfo
-    client:
-      clientId: admin
-      clientSecret: 7a57a5a743894a0e
-      access-token-uri: http://127.0.0.1:7777/uaa/oauth/token
-      user-authorization-uri: http://127.0.0.1:7777/uaa/oauth/authorize
-      grant-type: client_credentials,password
-
-userdetails:
-  clients:
-  - application: xysy-seeker
-    defaultClient: true
-    desc: 默认中台userdetails服务配置
-#  - application: seeker-member
-#    clientId: member
-#    desc: 小程序会员userdetails服务配置
 
 feign:
   okhttp:
