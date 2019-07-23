@@ -36,12 +36,6 @@ security:
   oauth2:
     resource:
       prefer-token-info: true
-    client:
-      clientId: admin
-      clientSecret: 7a57a5a743894a0e
-      access-token-uri: http://127.0.0.1:7777/uaa/oauth/token
-      user-authorization-uri: http://127.0.0.1:7777/uaa/oauth/authorize
-      grant-type: client_credentials
 
 # swagger配置
 #swagger:
@@ -58,31 +52,6 @@ security:
 #    contact-email: 'company@whxiuying.com'
 #    terms-of-service-url: 'http://www.whxiuying.com'
 #    base-package: 'com.xiuying.seeker.auth.web.controller'
-#    oauth:
-#      clientId: test
-#      clientSecret: test
-#      access-token-uri: http://127.0.0.1:7777/uaa/oauth/token
-#      user-authorization-uri: http://127.0.0.1:7777/uaa/oauth/authorize
-
-userdetails:
-  clients:
-  - application: xysy-seeker
-    defaultClient: true
-    desc: 默认中台userdetails服务配置
-#  - application: seeker-member
-#    clientId: member
-#    desc: 小程序会员userdetails服务配置
-
-feign:
-  okhttp:
-    enabled: false
-    httpclient:
-      enabled: true
-      maxConnections: 20480
-      maxConnectionsPerRoute: 512
-      timeToLive: 60
-      connectionTimeout: 10000
-      userAgent: 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0'
 
 # 日志
 logging:
