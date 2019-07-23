@@ -37,6 +37,7 @@ spring:
     settings:
       auto_import: /spring.ftl as spring
 
+
 # 管理端口设置权限控制
 management:
   endpoints:
