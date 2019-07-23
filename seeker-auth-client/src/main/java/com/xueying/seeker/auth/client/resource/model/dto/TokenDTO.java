@@ -53,6 +53,7 @@ public class TokenDTO implements Serializable {
     /**
      * 作用域
      */
+    @JsonProperty(value = "scope")
     @ApiModelProperty(value = "作用域", example = "read write", required = true, position = 4)
     private String scope;
     /**
