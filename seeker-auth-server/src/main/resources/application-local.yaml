@@ -20,6 +20,17 @@ spring:
       logAbandoned: true
       poolPreparedStatements: true
       maxOpenPreparedStatements: 100
+#redis配置
+  redis:
+    database: 0
+    host: ${maven_docker.ip}
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
 
 #  开启flyway
   flyway:
@@ -30,10 +41,6 @@ spring:
     password: Ytsy3113678AB
     clean-disabled: true
     schemas: auth
-  redis:
-    host: ${maven_docker.ip}
-    port: 6379
-    database: 1
 
 # oauth配置
 security:
