@@ -16,7 +16,6 @@ import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 
 /**
@@ -28,7 +27,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Configuration
 @EnableFeignClients(basePackages = "com.xueying.seeker.auth.client.resource.client")
 @Import(FeignClientsConfiguration.class)
-@EnableOAuth2Client
 public class FeignClientConfig {
 
     /**
