@@ -10,6 +10,7 @@
         <!-- Main content -->
             <div class="callout callout-info">
                 <h4>欢迎您登录影通分布式OAuth2框架</h4>
+                <a href="${request.contextPath}/logout">登出</a>
             </div>
     </div>
 </div>
