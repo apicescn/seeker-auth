@@ -47,7 +47,7 @@
         <spring-boot-redis.version>2.1.5.RELEASE</spring-boot-redis.version>
         <spring-boot-mongodb.version>2.1.5.RELEASE</spring-boot-mongodb.version>
         <!--maven插件版本-->
-        <docker.image.prefix>whyt_seeker</docker.image.prefix>
+        <docker.image.prefix>whxy-containers</docker.image.prefix>
         <docker-maven-plugin.version>0.30.0</docker-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
