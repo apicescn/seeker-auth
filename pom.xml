@@ -49,6 +49,7 @@
         <!--maven插件版本-->
         <docker.image.prefix>whxy-containers</docker.image.prefix>
         <docker-maven-plugin.version>0.30.0</docker-maven-plugin.version>
+        <docker-maven-plugin-spotify.version>1.2.0</docker-maven-plugin-spotify.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-jar-plugin.version>3.1.2</maven-jar-plugin.version>
@@ -299,6 +300,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-maven-plugin-spotify.version}</version>
+                </plugin>
                 <!--spring boot打包插件-->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
