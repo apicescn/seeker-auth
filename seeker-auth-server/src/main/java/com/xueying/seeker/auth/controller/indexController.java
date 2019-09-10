@@ -28,8 +28,6 @@ public class indexController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //主体名，即登录用户名
         String name = auth.getName();
-        System.out.println(name);
-        //modelAndView.setViewName("redirect:/welcome.html");
         model.addAttribute("username", name);
         return "index";
     }
