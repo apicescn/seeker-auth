@@ -855,7 +855,7 @@
             },
             {
                 id: "9001",
-                text: "客户端管理配置",
+                text: "用户管理",
                 icon: "fa fa-laptop",
                 children: [
                     {
@@ -904,7 +904,7 @@
             },
             {
                 id: "9002",
-                text: "菜单二",
+                text: "客户端管理配置",
                 icon: "fa fa-edit",
                 children: [
                     {
