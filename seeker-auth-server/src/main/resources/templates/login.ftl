@@ -38,7 +38,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">统一认证中心</p>
 
-        <form action="${request.contextPath}/login" method="post">
+        <form action="${request.contextPath}/login" method="POST">
             <div class="form-group has-feedback">
                 <input name="username" type="text" class="form-control" placeholder="用户名">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

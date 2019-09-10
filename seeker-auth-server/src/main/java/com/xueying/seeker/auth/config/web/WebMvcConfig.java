@@ -24,11 +24,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * 注册绑定/login和login.ftl视图模板
-     * 
+     *
      * @param registry
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login.html").setViewName("login");
+        registry.addViewController("/index.html").setViewName("index");
+        registry.addViewController("/welcome.html").setViewName("welcome");
+        registry.addViewController("/welcome_iframe.html").setViewName("welcome_iframe");
     }
 }
