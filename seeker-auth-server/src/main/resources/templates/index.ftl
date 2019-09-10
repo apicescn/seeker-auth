@@ -324,7 +324,7 @@
                     <img src="${request.contextPath}/dist/img/user8-128x128.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>supAdmin</p>
+                    <p>${username}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
