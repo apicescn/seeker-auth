@@ -36,7 +36,7 @@ public interface ClientController {
     /**
      * 获取客户端列表url
      */
-    String GET_CLIENT_LIST = "/api/dto/list";
+    String GET_CLIENT_LIST = "/api/dto/clientList";
     /**
      * 客户端数据插入url
      */

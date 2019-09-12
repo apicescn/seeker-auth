@@ -11,6 +11,7 @@
 package com.xueying.seeker.auth.rest;
 
 import com.xueying.seeker.auth.config.feign.UserDetailsClientProperties;
+import com.xueying.seeker.common.core.model.dto.SimplePageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -35,5 +36,5 @@ public interface AuthUserDetailsController {
      * @return List<FeignClientProperties>
      */
     @ApiOperation(value = "用户详情信息查询", notes = "用户详情信息查询", protocols = "http,https", httpMethod = "GET")
-    List<UserDetailsClientProperties.FeignClientProperties> userDetails();
+    SimplePageVO<List<UserDetailsClientProperties.FeignClientProperties>> userDetails();
 }

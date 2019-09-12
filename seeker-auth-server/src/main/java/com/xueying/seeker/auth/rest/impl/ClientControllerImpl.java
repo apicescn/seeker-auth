@@ -72,8 +72,8 @@ public class ClientControllerImpl implements ClientController {
      * @param clientQuery 查询条件
      * @return 客户端信息
      */
-    @GetMapping(value = GET_CLIENT_LIST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Override
+    @RequestMapping(value = GET_CLIENT_LIST, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
     public SimplePageVO<List<ClientDTO>> listClientByPage(@Validated ClientQuery clientQuery, PageQuery pageQuery) {
         if (pageQuery.getPageIndex() == 0) {
             pageQuery.setPageIndex(RestConstant.DEFAULT_PAGE_INDEX);

@@ -79,7 +79,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // ResourceServerConfig和WebSecurityConfig都必须配置关于登录页面的配置
         http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll().successHandler(myAuthenctiationSuccessHandler);
         http.authorizeRequests()
-                .antMatchers("/login", "/index", "/welcome").permitAll()
+                .antMatchers("/login", "/index").permitAll()
                 .anyRequest().authenticated();
     }
 
@@ -106,6 +106,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/env/**", "/metrics/**", "/dump", "/jolokia/**", "/info", "/configprops", "/trace",
                 "/logfile", "/refresh/**", "/flyway", "/heapdump", "/loggers/**", "/autoconfig", "/auditevents",
                 "/hystrix.stream", "/health", "/bean", "/dist/**", "/webjars/**", "/swagger-ui.html",
-                "/swagger-resources/**", "/v2/api-docs/**");
+                "/swagger-resources/**", "/v2/api-docs/**", "/user/**");
     }
 }
