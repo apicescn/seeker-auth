@@ -61,11 +61,10 @@ public class indexController {
 
     /**
      * 客户端添加
-     * @param model
      * @return
      */
-    @RequestMapping("client/add")
-    public  String addClient(Model model){
+    @RequestMapping("client/addClient")
+    public  String addClient(){
         return "client/add";
     }
 }

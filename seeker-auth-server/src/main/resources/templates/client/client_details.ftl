@@ -21,6 +21,7 @@
     <#--table分页样式-->
     <link rel="stylesheet" href="${request.contextPath}/dist/plugins/datatables/jquery.dataTables.css"/>
 
+    <link rel="stylesheet" href="${request.contextPath}/dist/plugins/layui/css/layui.css"/>
 
     <!--http://aimodu.org:7777/admin/index_iframe.html?q=audio&search=#-->
     <style type="text/css">
@@ -37,6 +38,9 @@
     <style>
         .dataTables_info {
             display: none;
+        }
+        .dataTables_wrapper.no-footer .dataTables_scrollBody{
+            border-bottom: 1px solid #f1f1f1!important;
         }
     </style>
 </head>
@@ -63,7 +67,7 @@
                 <a class="btn btn-primary dialog" href="javascript:;" data-title="创建部门" data-url="/system/dept/add" data-width="800" data-height="400"><i class="fa fa-plus"></i> 创建部门</a>
 -->
 
-                <button type="button" data-title="添加" class="btn btn-sm btn-success" data-url="/system/dept/add" data-width="800" data-height="400">
+                <button type="button"  class="btn btn-sm btn-success" onclick="client_list_add();">
                     <i class="fa fa-plus"></i>增加
                 </button>
                 <button type="button" onclick="user_list_delete('1');" class="btn btn-sm btn-danger"><i
@@ -106,6 +110,7 @@
 
 <!--tabs-->
 <script src="${request.contextPath}/dist/js/app_iframe.js"></script>
+<script src="${request.contextPath}/dist/plugins/layui/layui.all.js"></script>
 
 <script type="text/javascript">
     var client_tab;
@@ -159,7 +164,12 @@
                 },
 
             },
-            "ajax": {"url": url, "data": client_param, "type": "post"},
+            "ajax": {"url": url, "data": client_param, "type": "post",
+                "dataSrc": function ( json ) {
+                var data =json.data==null?'':json.data;
+                    return data;
+                }
+            },
             "columns": [
                 {"data": "clientId"},
                 {"data": "clientId"},
@@ -185,7 +195,8 @@
                 {"data": "authorities"},
                 {"data": "accessTokenValidity"},
                 {"data": "clientId"}
-            ],
+            ]
+            ,
             "columnDefs": [
                 {
                     targets: 0,
@@ -232,8 +243,26 @@
     }
 
     //增加
-    function user_list_add() {
+    function client_list_add() {
+        layer.open({
+            type:2, //0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层)
+            area:['500px','600px'],
+            title: '新增',
+            content: '${request.contextPath}/client/addClient',
+            shade: 0,
+            btn: ['提交', '取消']
+            ,btn1: function(index, layero){
+                var kk=$("#username").val();
+                alert(kk);
+            },
+            btn2: function(index, layero){
+                layer.closeAll();
+            },
+            cancel: function(layero,index){
+                layer.closeAll();
+            }
 
+        });
     }
 
     //删除
