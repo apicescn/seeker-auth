@@ -5,7 +5,8 @@
 /*scope用来表示client_id的用途：web/api */
 DROP TABLE IF EXISTS oauth_client_details;
 CREATE TABLE oauth_client_details (
-  client_id               NVARCHAR(255) NOT NULL PRIMARY KEY,
+  id                      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  client_id               NVARCHAR(255) NOT NULL ,
   resource_ids            NVARCHAR(256) NULL,
   client_secret           NVARCHAR(256) NULL,
   scope                   NVARCHAR(256) NULL,
