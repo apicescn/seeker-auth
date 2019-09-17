@@ -11,6 +11,25 @@
         .layui-input-block {
             margin-top: 20px !important;
         }
+        div[xm-select-skin] .xm-select-title div.xm-select-label>span {
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .xm-select-parent .xm-select-title div.xm-select-label>span {
+            position: relative;
+            padding: 2px 5px;
+            background-color: rgba(255,255,255,0.15);
+            border-radius: 2px;
+            color: #111;
+            display: inline-block;
+            line-height: 18px;
+            height: 18px;
+            margin: 2px 5px 2px 0;
+            cursor: initial;
+            user-select: none;
+            font-size: 14px;
+            padding-right: 25px;
+            -webkit-user-select: none;
+        }
     </style>
 </head>
 <body>
