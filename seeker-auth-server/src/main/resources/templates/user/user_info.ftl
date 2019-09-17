@@ -15,5 +15,22 @@
             </div>
     </div>
 </div>
+<!-- jQuery 2.2.3 -->
+<script src="${request.contextPath}/dist/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script>
+    $(function () {
+        var options = {
+            url: '${request.contextPath}/user',
+            type: 'get',
+            dataType: 'text',
+            success: function (res) {
+                jsonData = res
+                json = JSON.stringify(jsonData);
+                console.log(json)
+            }
+        };
+        $.ajax(options);
+    })
+</script>
 </body>
 </html>

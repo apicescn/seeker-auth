@@ -23,6 +23,11 @@ import java.io.Serializable;
 @Data
 public class ClientDTO implements Serializable {
     /**
+     * 自增ID *
+     */
+    @ApiModelProperty(value = "自增ID", example = "1", required = true, position = 0)
+    private Long id;
+    /**
      * 用于客户端唯一标识 *
      */
     @ApiModelProperty(value = "客户端ID", example = "app", required = true, position = 0)

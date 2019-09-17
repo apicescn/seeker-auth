@@ -16,15 +16,26 @@
 <body>
 <div>
     <form class="layui-form" id="test">
+        <div class="layui-form-item" style="display: none">
+            <div class="layui-input-block">
+                <input type="text" name="id"
+                       class="layui-input" id="id" style="display: none"><#--autocomplete="on"-->
+            </div>
+        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">客户端ID</label>
             <div class="layui-input-block">
                 <input type="text" name="clientId" required lay-verify="required|isExitClientID" placeholder="请输入客户端ID"
-                       class="layui-input" id="clientId" style="width:200px"><#--autocomplete="on"-->
+                       class="layui-input" id="clientId"
+                       style="width:200px"><#--autocomplete="on"--><#--lay-verify="required|number|isXiaoYu|isManZu"-->
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">服务ID</label>
+          <#--  <div class="layui-input-block">
+                <input type="text" name="resourceIds" required lay-verify="required" placeholder="服务ID"
+                       class="layui-input" id="resourceIds" style="width:200px">
+            </div>-->
             <div class="layui-input-block" style="width:200px" xm-select-type="1">
                 <select name="resourceIds" id="resourceIds"
                         lay-filter="select_resourceIds"
@@ -44,45 +55,23 @@
                        class="layui-input" id="clientSecret" style="width:200px">
             </div>
         </div>
-        <#--    <div class="layui-form-item">
-                <label class="layui-form-label">密码框</label>
-                <div class="layui-input-inline">
-                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="on" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">辅助文字</div>
-            </div>-->
-        <#--<div class="layui-form-item">
-            <label class="layui-form-label">选择框</label>
-            <div class="layui-input-block">
-                <select name="quiz" lay-search>
-                    <option value="">请选择</option>
-                    <optgroup label="城市记忆">
-                        <option value="你工作的第一个城市">你工作的第一个城市？</option>
-                    </optgroup>
-                    <optgroup label="学生时代">
-                        <option value="你的工号">你的工号？</option>
-                        <option value="你最喜欢的老师">你最喜欢的老师？</option>
-                    </optgroup>
-                </select>
-            </div>
-        </div>-->
         <div class="layui-form-item">
             <label class="layui-form-label">访问域</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="scope" title="write" value="write" lay-skin="primary">
-                <input type="checkbox" name="scope" title="read" value="read" checked lay-skin="primary">
+                <input type="checkbox" id="scope" name="scope" title="read" value="read" lay-skin="primary">
+                <input type="checkbox" id="scope" name="scope" title="write" value="write" lay-skin="primary">
                 <#--<input type="checkbox" name="like[dai]" title="发呆" lay-skin="primary">-->
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">oauth授权类型</label>
             <div class="layui-input-block" style="width:200px" xm-select-type="1">
-                <select name="authorizedGrantTypes" id="select_authorizedGrantTypes"
+                <select name="authorizedGrantTypes" id="authorizedGrant"
                         lay-filter="select_authorizedGrantTypes"
-                        xm-select="select_authorizedGrantTypes" xm-select-type="1">
-                    <option value=""></option>
-                    <option value="client_credentials">client_credentials</option>
-                    <option value="password">password</option>
+                        xm-select="_authorizedGrantTypes" xm-select-type="1">
+                    <option value=''></option>
+                    <option value='client_credentials'>client_credentials</option>
+                    <option value='password'>password</option>
                 </select>
 
             </div>
@@ -121,23 +110,47 @@
 <script src="${request.contextPath}/dist/plugins/layui/formSelects-v4.js"></script>
 <script type="text/javascript">
     var formSelects = layui.formSelects;
-    var exitClientId = false;
+
+    $(function () {
+        var parent_json = eval('(' + parent.json + ')');
+        var _json = eval('(' + parent_json + ')');
+        var data = _json.data
+        $("#id").val(data.id);
+        $("#clientId").val(data.clientId);
+        //服务ID集合
+        var resourceIds = data.resourceIds.split(",");
+        formSelects.render('_resourceIds');
+        if (resourceIds != null) {
+            formSelects.render('_resourceIds');
+            formSelects.value('_resourceIds', resourceIds, true);
+        }
+        //密钥
+        $("#clientSecret").val(data.clientSecret);
+        //访问域
+        $("#scope").val(data.scope);
+        var scope = data.scope.split(",");
+        for (var j = 0; j < scope.length; j++) {
+            var scopeCheckbox = $("input[id='scope']");
+            for (var i = 0; i < scopeCheckbox.length; i++) {
+                if (scopeCheckbox[i].title == scope[j]) {
+                    // scopeCheckbox[i].value = scope[j];
+                    scopeCheckbox[i].checked = true;
+                }
+            }
+        }
+        var authorizedGrant = data.authorizedGrantTypes.split(",");
+        formSelects.render('_authorizedGrantTypes');
+        if (authorizedGrant != null) {
+            formSelects.render('_authorizedGrantTypes');
+            formSelects.value('_authorizedGrantTypes', authorizedGrant, true);
+        }
+        $("#authorities").val(data.authorities);
+        $("#accessTokenValidity").val(data.accessTokenValidity);
+        renderForm();//表单重新渲染，要不然添加完显示不出来新的
+    });
 </script>
 <script type="text/javascript">
-
-    /*全选*/
-    /*    layui.use(['form','jquery'], function () {
-            var form = layui.form;
-            var $ = layui.jquery;
-            //点击全选, 勾选
-            form.on('checkbox(allChoose)', function (data) {
-                var child = $(".seach-box input[type='checkbox']");
-                child.each(function (index, item) {
-                    item.checked = data.elem.checked;
-                });
-                form.render('checkbox');
-            });
-        });*/
+    var exitClientId = false;
     layui.use(['form', 'layer', 'jquery', 'table', 'laydate', 'element', 'upload', 'flow'], function () {
         var $$ = layui.jquery;
         var form = layui.form,
@@ -176,11 +189,17 @@
     layui.use('form', function () {
         var form = layui.form;
         form.verify({
+            /*isXiaoYu: function (value, item) {
+                if ($("#proNum").val() - value < 0) { // 不满足库存
+                    return "订购数量不能大于库存数量";
+                }
+            },*/
             //判断是否存在clientID
             isExitClientID: function (value, item) {
+                var id = $("#id").val();
                 var clientId = $("#clientId").val();
-                var url = "${request.contextPath}/api/dto/clientId";
-                var data = {clientId: clientId};
+                var url = "${request.contextPath}/api/dto/id";
+                var data = {id: id, clientId:clientId};
                 $.ajax({
                     type: "get",
                     url: url,
@@ -192,7 +211,7 @@
                                 tips: [3, '#0FA6D8'] //还可配置颜色
                             });
                             exitClientId = true;
-                            setTimeout(function () {
+                            setTimeout(function (){
                                 return false;
                             }, 3000);
                         }
@@ -208,18 +227,21 @@
             if (!exitClientId) {
                 var $ = layui.jquery
                 var loading = layer.load(0, {shade: false});
-
                 //获取checkbox[name='scope']的值
                 var arr = new Array();
+                /*$("input:checkbox[id='scope']:checked").each(function (i) {
+                    arr[i] = $(this).val();
+                });*/
                 $("[id='scope']:checkbox").each(function (i) {
                     if ($(this).is(":checked")) {
+                        //arr.push($(this).attr("title"));
                         arr[i] = $(this).attr("title");
                     }
                 });
                 data.field.scope = arr.join(",");//将数组合并成字符串
                 var data1 = data.field;
                 $.ajax({
-                    url: '${request.contextPath}/api/dto/insert',
+                    url: '${request.contextPath}/api/dto/update',
                     type: 'post',
                     data: data1,
                     success: function (res) {
@@ -233,11 +255,19 @@
                     }
                 });
                 return false;
-            } else {
+            }else{
                 return false;
             }
         })
     })
+
+    //重新渲染表单函数
+    function renderForm() {
+        layui.use('form', function () {
+            var form = layui.form; //高版本建议把括号去掉，有的低版本，需要加()
+            form.render();
+        });
+    }
 </script>
 </body>
 </html>

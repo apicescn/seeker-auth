@@ -67,4 +67,12 @@ public class indexController {
     public  String addClient(){
         return "client/add";
     }
+    /**
+     * 客户端编辑
+     * @return
+     */
+    @RequestMapping("client/editClient")
+    public  String editClient(){
+        return "client/edit";
+    }
 }

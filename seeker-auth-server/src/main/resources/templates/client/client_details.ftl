@@ -39,8 +39,9 @@
         .dataTables_info {
             display: none;
         }
-        .dataTables_wrapper.no-footer .dataTables_scrollBody{
-            border-bottom: 1px solid #f1f1f1!important;
+
+        .dataTables_wrapper.no-footer .dataTables_scrollBody {
+            border-bottom: 1px solid #f1f1f1 !important;
         }
     </style>
 </head>
@@ -63,14 +64,10 @@
                 <button type="button" onclick="client_list_query();" class="btn btn-sm btn-primary"><i
                             class="fa fa-search"></i>搜索
                 </button>
-<#--
-                <a class="btn btn-primary dialog" href="javascript:;" data-title="创建部门" data-url="/system/dept/add" data-width="800" data-height="400"><i class="fa fa-plus"></i> 创建部门</a>
--->
-
-                <button type="button"  class="btn btn-sm btn-success" onclick="client_list_add();">
+                <button type="button" class="btn btn-sm btn-success" onclick="client_list_add();">
                     <i class="fa fa-plus"></i>增加
                 </button>
-                <button type="button" onclick="user_list_delete('1');" class="btn btn-sm btn-danger"><i
+                <button type="button" onclick="client_list_delete('##');" class="btn btn-sm btn-danger"><i
                             class="fa fa-remove"></i>删除
                 </button>
                 <button type="button" onclick="client_list_reset();" class="btn btn-sm btn-default">重置</button>
@@ -115,6 +112,7 @@
 <script type="text/javascript">
     var client_tab;
     var client_param;
+    var jsonData;
     // language=JQuery-CSS
     $(function () {
         //不显示
@@ -164,9 +162,10 @@
                 },
 
             },
-            "ajax": {"url": url, "data": client_param, "type": "post",
-                "dataSrc": function ( json ) {
-                var data =json.data==null?'':json.data;
+            "ajax": {
+                "url": url, "data": client_param, "type": "post",
+                "dataSrc": function (json) {
+                    var data = json.data == null ? '' : json.data;
                     return data;
                 }
             },
@@ -177,9 +176,11 @@
                 {
                     "data": "clientSecret",
                     render: function (data, type, row, meta) {
+                        console.log(data)
                         //type 的值  dispaly sort filter
                         //代表，是显示类型的时候判断值的长度是否超过8，如果是则截取
                         //这里只处理了类型是显示的，过滤和排序返回原始数据
+                        data = '*************';
                         if (type === 'display') {
                             if (data.length > 8) {
                                 return '<span title="' + data + '">' + data.substr(0, 7) + '...</span>';
@@ -206,23 +207,22 @@
                         return '<input type="checkbox" class="userCheckbox" value="' + data + '"/>';
                     }
                 },
-                /*               {
-                                   targets: 1,
-                                   data: null,
-                                   orderable:false,
-                                   render: function (data) {
-                                       No=No+1;
-                                       return No;
-                                   }
-                               },*/
+             /*   {
+                    targets: 3,
+                    data: null,
+                    orderable: false,
+                    render: function (data) {
+                        return '*****';
+                    }
+                },*/
                 {
                     "targets": -1,
                     "data": null,
                     orderable: false,
                     "render": function (data) {
                         var data = "'" + data + "'";
-                        var btn1 = '<a class="btn btn-xs btn-warning"  target="modal" modal="hg" href=""><i class="fa fa-edit"></i>修改</a> &nbsp;';
-                        var btn2 = '<a class="btn btn-xs btn-danger"  target="modal" modal="hg" onclick="user_list_delete(' + data + ')"><i class="fa fa-remove"></i>删除</a> &nbsp;';
+                        var btn1 = '<a class="btn btn-xs btn-warning"  target="modal" modal="hg" onclick="client_list_edit(' + data + ');"><i class="fa fa-edit"></i>修改</a> &nbsp;';
+                        var btn2 = '<a class="btn btn-xs btn-danger"  target="modal" modal="hg" onclick="client_list_delete(' + data + ')"><i class="fa fa-remove"></i>删除</a> &nbsp;';
                         return btn1 + btn2;
                     }
                 }
@@ -245,36 +245,75 @@
     //增加
     function client_list_add() {
         layer.open({
-            type:2, //0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层)
-            area:['500px','600px'],
+            type: 2, //0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层)
+            area: ['400px', '600px'],
             title: '新增',
             content: '${request.contextPath}/client/addClient',
             shade: 0,
-            btn: ['提交', '取消']
-            ,btn1: function(index, layero){
-                var kk=$("#username").val();
-                alert(kk);
-            },
-            btn2: function(index, layero){
-                layer.closeAll();
-            },
-            cancel: function(layero,index){
-                layer.closeAll();
-            }
-
+            /*  btn: ['提交', '取消']
+              ,btn1: function(index, layero){
+                  var kk=$("#username").val();
+                  alert(kk);
+              },
+              btn2: function(index, layero){
+                  layer.closeAll();
+              },
+              cancel: function(layero,index){
+                  layer.closeAll();
+              }
+  */
         });
     }
 
+    /*编辑*/
+    function client_list_edit(obj) {
+        var options = {
+            url: '${request.contextPath}/api/dto/clientId?clientId=' + obj,
+            type: 'get',
+            dataType: 'text',
+            success: function (res) {
+                jsonData = res
+                json = JSON.stringify(jsonData);
+                console.log(json)
+                layer.open({
+                    type: 2, //0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层)
+                    area: ['400px', '600px'],
+                    title: '编辑',
+                    zIndex: layer.zIndex,
+                    content: '${request.contextPath}/client/editClient',
+                    shade: 0,
+                    success: function (layero, index) {
+                    }
+                });
+            }
+        };
+        $.ajax(options);
+    }
+
+    /*根据ClientId获取行数据*/
+    function getDataByClientId(id) {
+        var options = {
+            url: '${request.contextPath}/api/dto/clientId?clientId=' + id,
+            type: 'get',
+            dataType: 'text',
+            success: function (data) {
+                jsonData = data
+                return jsonData;
+            }
+        };
+        $.ajax(options);
+    }
+
     //删除
-    function user_list_delete(param) {
+    function client_list_delete(param) {
         var href = "/";
         var title = "<p>警告！ 所选取的数据将会被删除！</p>";
         var cb;
-        if (param == "1") {
+        if (param == "##") {
             var checkNum = $('input:checkbox[class="userCheckbox"]:checked').length;
             var checkVal = [];
             if (checkNum == 0) {
-                alertMsg("<p>请选择数据</p>", "warning");
+                layer.msg('请选择数据', {time: 3000, icon: 6});
                 return;
             }
             $.each($('input:checkbox[class="userCheckbox"]:checked'), function () {
@@ -282,9 +321,10 @@
             });
             cb = "user_list_delete_data('" + checkVal + "');";
         } else {
-            cb = "user_list_delete_one_data('" + param + "');";
+            //cb = "client_list_delete_one_data('" + param + "');";
+            client_list_delete_one_data(param);
         }
-        $("#smModal").attr("action", href).attr("callback", cb).find(".modal-body").html(title).end().modal("show");
+        //$("#smModal").attr("action", href).attr("callback", cb).find(".modal-body").html(title).end().modal("show");
         //$("#smModal").modal("show");
     }
 
@@ -292,7 +332,7 @@
 
         var options = {
             url: '/admin/user/delete?checkVal=' + checkVal,
-            type: 'get',
+            type: 'post',
             dataType: 'text',
             success: function (data) {
                 if (data > 0) {
@@ -306,17 +346,23 @@
         $.ajax(options);
     }
 
-    function user_list_delete_one_data(id) {
-        var options = {
-            url: '/admin/user/deleteOne?id=' + id,
-            type: 'get',
-            dataType: 'text',
-            success: function (data) {
-                client_tab.draw(false);
-                alertMsg("<p>删除成功</p>", "success");
-            }
-        };
-        $.ajax(options);
+    //单个删除
+    function client_list_delete_one_data(id) {
+        layer.confirm('确认删除此条数据？', {
+            btn: ['确认', '取消']
+        }, function () {
+            var options = {
+                url: '${request.contextPath}/api/dto/delete?clientId=' + id,
+                type: 'get',
+                dataType: 'text',
+                success: function (success) {
+                    client_tab.draw(false);
+                    layer.msg('删除成功', {time: 2000, icon: 6});
+                }
+            };
+            $.ajax(options);
+        });
+
     }
 
     //搜索
@@ -325,7 +371,6 @@
         client_tab.settings()[0].ajax.data = client_param;
         client_tab.ajax.reload();
     }
-
     //动态拼接参数
     function client_list_setParm() {
         var client_name = $("#client_name").val() == '' ? null : $("#client_name").val();
@@ -334,7 +379,7 @@
             "pageIndex": 1,
             "pageSize": 10
         }
-        if (client_name!=null) {
+        if (client_name != null) {
             client_param["clientId"] = client_name
         }
         /*client_param = client_name == null ? {

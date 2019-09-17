@@ -38,6 +38,9 @@
         .dataTables_info{
             display: none;
         }
+        .dataTables_wrapper.no-footer .dataTables_scrollBody {
+            border-bottom: 1px solid #f1f1f1 !important;
+        }
     </style>
 </head>
 <body>

@@ -12,7 +12,7 @@ package com.xueying.seeker.auth.rest.impl;
 
 import java.security.Principal;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -35,8 +35,9 @@ public class AuthUserControllerImpl implements AuthUserController {
      * @return Principal
      */
     @Override
-    @GetMapping(value = GET_USER)
+    @RequestMapping(value = GET_USER)
     public Principal user(Principal user) {
+        System.out.println(user);
         return user;
     }
 }

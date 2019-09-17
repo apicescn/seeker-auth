@@ -49,15 +49,33 @@ public class ClientControllerImpl implements ClientController {
     private ClientService clientService;
 
     /**
+     * 根据主键ID查询客户端
+     * @param id ID
+     * @return
+     */
+    @Override
+    @GetMapping(value = GET_CLIENT_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public SimpleVO<ClientDTO> getClientById(@RequestParam(name = "id", required = true) Long id,
+                                             @RequestParam(name = "clientId", required = true) String clientId) {
+        ClientDO clientDO = clientService.getById(id, clientId);
+        if (clientDO == null) {
+            return new SimpleVO<>(CodeEnum.DATA_NOT_FOUND);
+        }
+        ClientDTO clientDTO = new ClientDTO();
+        BeanUtils.copyProperties(clientDO, clientDTO);
+        return new SimpleVO<>(clientDTO);
+    }
+
+    /**
      * 根据客户端ID查询客户端
      *
      * @param id 客户端ID
      * @return 客户端信息
      */
-    @GetMapping(value = GET_CLIENT_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = GET_CLIENT_BY_CLIENTID, produces = {MediaType.APPLICATION_JSON_VALUE})
     @Override
-    public SimpleVO<ClientDTO> getClientById(@PathVariable("id") String id) {
-        ClientDO clientDO = clientService.getById(id);
+    public SimpleVO<ClientDTO> getClientByClientId(@RequestParam(name = "clientId", required = false) String id) {
+        ClientDO clientDO = clientService.getByClientId(id);
         if (clientDO == null) {
             return new SimpleVO<>(CodeEnum.DATA_NOT_FOUND);
         }
@@ -97,8 +115,7 @@ public class ClientControllerImpl implements ClientController {
      * @param clientQuery 客户端信息
      * @return 操作结果
      */
-    @PostMapping(value = INSERT_CLIENT, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = INSERT_CLIENT, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
     @Override
     public SimpleVO insertClient(@Valid ClientQuery clientQuery) {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);
@@ -112,15 +129,17 @@ public class ClientControllerImpl implements ClientController {
     /**
      * 客户端更新
      *
+     * @param id          id
      * @param clientQuery 客户端信息
      * @return 操作结果
      */
     @PostMapping(value = UPDATE_CLIENT, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     @Override
-    public SimpleVO updateClient(@Valid ClientQuery clientQuery) {
+    public SimpleVO updateClient(@RequestParam("id") Long id,
+                                 @Valid ClientQuery clientQuery) {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);
-        Boolean result = clientService.update(clientQuery);
+        Boolean result = clientService.update(id, clientQuery);
         if (!result) {
             simpleVO = new SimpleVO(CodeEnum.UPDATE_FAILED);
         }
@@ -133,12 +152,11 @@ public class ClientControllerImpl implements ClientController {
      * @param id 客户端Id
      * @return 操作结果
      */
-    @PostMapping(value = DELETE_CLIENT, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = DELETE_CLIENT, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
     @Override
     public SimpleVO deleteClient(@RequestParam("clientId") String id) {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);
-        Boolean result = clientService.removeById(id);
+        Boolean result = clientService.removeByClientId(id);
         if (!result) {
             simpleVO = new SimpleVO(CodeEnum.DELETE_FAILED);
         }
