@@ -35,7 +35,8 @@ public interface AuthUserDetailsController {
     String GET_USER_DETAILS = "/api/userDetails/list";
 
     /**
-     * 获得用户配置信息，从配置文件中获取
+     * 获得Auth用户认证配置信息(查询UserDetails)，从配置文件中获取
+     *
      * @return List<FeignClientProperties>
      */
     @ApiOperation(value = "用户详情信息查询", notes = "用户详情信息查询", protocols = "http,https", httpMethod = "GET")

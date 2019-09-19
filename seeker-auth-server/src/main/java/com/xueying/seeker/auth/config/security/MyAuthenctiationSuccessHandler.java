@@ -26,17 +26,15 @@ public class MyAuthenctiationSuccessHandler extends SavedRequestAwareAuthenticat
 
         RequestCache cache = new HttpSessionRequestCache();
         SavedRequest savedRequest = cache.getRequest(request, response);
+        savedRequest = null;
         // 如果来源请求为空则跳转到用户首页
         String url = "";
-        if ((savedRequest == null)) {
+        if (savedRequest == null) {
             //url = "/blog/" + SecurityUtil.getLoginUser();
             url = "/uaa/loginSuccess";
         } else {
             url = savedRequest.getRedirectUrl();
         }
-
-        System.out.println(url);
-
         response.sendRedirect(url);
     }
 }

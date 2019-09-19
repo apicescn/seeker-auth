@@ -39,6 +39,7 @@ public class AuthUserDetailsControllerImpl implements AuthUserDetailsController 
     private UserDetailsClientProperties properties;
 
     /**
+     * 查询UserDetails
      * @return List<FeignClientProperties>
      */
     @Override
