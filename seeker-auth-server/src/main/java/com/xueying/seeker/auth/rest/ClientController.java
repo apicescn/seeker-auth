@@ -58,7 +58,7 @@ public interface ClientController {
     /**
      * 获取每一个服务下面实例服务ID
      */
-    String SERVICE_URL = "/api/dto/serviceUrl";
+    String SERVICE_NAME = "/api/dto/serviceName";
     /**
      * 根据主键ID查询客户端
      *
@@ -129,6 +129,6 @@ public interface ClientController {
      */
     @ApiOperation(value = "服务ID列表", notes = "服务ID列表",
             protocols = "http,https", httpMethod = "GET")
-    List<String> listServiceUrl();
+    List<String> listServiceName();
 
 }

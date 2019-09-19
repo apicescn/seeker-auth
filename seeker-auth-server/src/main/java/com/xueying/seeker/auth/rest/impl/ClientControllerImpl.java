@@ -180,8 +180,8 @@ public class ClientControllerImpl implements ClientController {
      *
      * @return Map
      */
-    @RequestMapping(value = SERVICE_URL, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
-    public List<String> listServiceUrl() {
+    @RequestMapping(value = SERVICE_NAME, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
+    public List<String> listServiceName() {
         List<String> services = discoveryClient.getServices();
         return services;
     }

@@ -59,10 +59,6 @@
                 <select name="resourceIds" id="resourceIds"
                         lay-filter="select_resourceIds"
                         xm-select="_resourceIds" xm-select-type="1">
-                    <option value=''></option>
-                    <option value='xysy-seeker'>xysy-seeker</option>
-                    <option value='seeker-web'>seeker-web</option>
-                    <option value='seeker-auth-server'>seeker-auth-server</option>
                 </select>
 
             </div>
@@ -134,7 +130,7 @@
     $(function () {
         var htmls = '<option value="">请选择</option>'; //全局变量
         $.ajax({
-            url: "${request.contextPath}/api/dto/serviceUrl",
+            url: "${request.contextPath}/api/dto/serviceName",
             type: "post",
             dataType : "json",
             contentType : "application/json",
