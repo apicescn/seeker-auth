@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import java.security.Principal;
 
 import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 获取用户信息
@@ -34,6 +35,7 @@ public interface AuthUserController {
      * @param user 用户信息
      * @return Principal
      */
+    @RequestMapping(value = GET_USER)
     @ApiOperation(value = "用户信息查询", notes = "用户信息查询", protocols = "http,https", httpMethod = "GET")
     Principal user(Principal user);
 }

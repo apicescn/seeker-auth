@@ -52,6 +52,7 @@ public class ClientService extends ServiceImpl<ClientDAO, ClientDO> {
     /**
      * 更新客户端信息
      *
+     * @param id 主键
      * @param clientQuery 客户端信息
      * @return 更新记录
      */
@@ -102,9 +103,9 @@ public class ClientService extends ServiceImpl<ClientDAO, ClientDO> {
     /**
      * 根据clientId删除
      * @param clientId clientId
-     * @return
+     * @return 删除是否成功
      */
-    public Boolean removeByClientId(String clientId){
+    public Boolean removeByClientId(String clientId) {
         QueryWrapper<ClientDO> qwrapper = new QueryWrapper<>();
         qwrapper.eq(true, "client_id", clientId);
         return remove(qwrapper);
@@ -113,9 +114,9 @@ public class ClientService extends ServiceImpl<ClientDAO, ClientDO> {
     /**
      * 根据clientId获取详情
      * @param clientId clientId
-     * @return
+     * @return 客户端DO信息
      */
-    public ClientDO getByClientId(String clientId){
+    public ClientDO getByClientId(String clientId) {
         QueryWrapper<ClientDO> qwrapper = new QueryWrapper<>();
         qwrapper.eq(true, "client_id", clientId);
         return getOne(qwrapper);
@@ -124,13 +125,13 @@ public class ClientService extends ServiceImpl<ClientDAO, ClientDO> {
     /**
      * 根据Id、clientId判断ClientID是否存在
      * @param id 主键ID
-     * @param ClientId 客户端ID
+     * @param clientId 客户端ID
      * @return Boolean
      */
-    public ClientDO getById(Long id, String ClientId){
+    public ClientDO getById(Long id, String clientId) {
         QueryWrapper<ClientDO> qwrapper = new QueryWrapper<>();
         qwrapper.ne(true, "id", id)
-                .eq(true, "client_id", ClientId);
+                .eq(true, "client_id", clientId);
         return getOne(qwrapper);
     }
 }

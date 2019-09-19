@@ -64,8 +64,8 @@ public class ClientControllerImpl implements ClientController {
      */
     @Override
     @GetMapping(value = GET_CLIENT_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public SimpleVO<ClientDTO> getClientById(@RequestParam(name = "id", required = true) Long id,
-                                             @RequestParam(name = "clientId", required = true) String clientId) {
+    public SimpleVO<ClientDTO> getClientById(@RequestParam(name = "id") Long id,
+                                             @RequestParam(name = "clientId") String clientId) {
         ClientDO clientDO = clientService.getById(id, clientId);
         if (clientDO == null) {
             return new SimpleVO<>(CodeEnum.DATA_NOT_FOUND);
