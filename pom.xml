@@ -524,7 +524,7 @@
             <id>dev</id>
             <properties>
                 <maven_spring.profiles.active>dev</maven_spring.profiles.active>
-                <maven_docker.ip>192.168.2.108</maven_docker.ip>
+                <maven_docker.ip>127.0.0.1</maven_docker.ip>
                 <maven_nacos.ip>223.247.158.178</maven_nacos.ip>
                 <maven_nacos.port>8848</maven_nacos.port>
             </properties>
