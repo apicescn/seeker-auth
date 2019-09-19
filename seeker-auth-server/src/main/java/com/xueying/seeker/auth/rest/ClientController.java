@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Allen
  * @date 2019-07-10
  */
-@Api(tags = {"dto-controller"})
+@Api(tags = {"client-controller"})
 public interface ClientController {
     /**
      * 根据ID查询客户端url
@@ -63,12 +63,13 @@ public interface ClientController {
      * 根据主键ID查询客户端
      *
      * @param id ID
+     * @param clientId 客户端编码
      * @return ClientDO
      */
     @ApiOperation(value = "根据主键ID查询客户端", notes = "根据主键ID查询客户端",
             protocols = "http,https", httpMethod = "GET")
-    SimpleVO<ClientDTO> getClientById(@ApiParam(name = "id", value = "自增id", required = true) Long id
-            , @ApiParam(name = "clientId", value = "客户端ID", required = true) String clientId);
+    SimpleVO<ClientDTO> getClientById(@ApiParam(name = "id", value = "自增id", required = true) Long id,
+                                      @ApiParam(name = "clientId", value = "客户端ID", required = true) String clientId);
 
     /**
      * 根据客户端ID查询客户端
