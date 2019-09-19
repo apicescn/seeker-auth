@@ -24,8 +24,6 @@ import com.xueying.seeker.auth.model.query.PageQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -47,7 +45,6 @@ public class ApiService extends ServiceImpl<ApiDAO, ApiDO> {
     public Boolean insert(ApiQuery apiQuery) {
         ApiDO apiDO = new ApiDO();
         BeanUtils.copyProperties(apiQuery, apiDO);
-        apiDO.setDateCreated(new Date());
         return save(apiDO);
     }
 
@@ -59,7 +56,6 @@ public class ApiService extends ServiceImpl<ApiDAO, ApiDO> {
     public Boolean update(ApiQuery apiQuery) {
         ApiDO apiDO = getById(apiQuery.getId());
         BeanUtils.copyProperties(apiQuery, apiDO);
-        apiDO.setLastModified(new Date());
         return updateById(apiDO);
     }
 
@@ -133,19 +129,6 @@ public class ApiService extends ServiceImpl<ApiDAO, ApiDO> {
             }
         }
         return success;
-    }
-
-
-    /**
-     * 查询所有的API
-     *
-     * @return 所有的API
-     */
-    public List<ApiDO> findAll() {
-        Wrapper<ApiDO> eWrapper = new QueryWrapper<>();
-        List<ApiDO> apiDOList = list(eWrapper);
-        return apiDOList;
-
     }
 
 }

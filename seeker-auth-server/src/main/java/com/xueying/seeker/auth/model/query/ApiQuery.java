@@ -1,69 +1,55 @@
+/**
+ * Copyright (C), 2019, 安徽雪影实业有限公司
+ * FileName: ApiQuery
+ * Author:   Allen
+ * Date:     2019/9/19
+ * Description: API VO
+ * History:
+ * <author>          <time>          <version>          <desc>
+ * 作者姓名           修改时间           版本号              描述
+ */
 package com.xueying.seeker.auth.model.query;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.Data;
 
 /**
  * API VO
  *
- * @author 鼠良帅
- * @date 2018/3/7
+ * @author Allen
+ * @date 2019/9/19
  */
 @Data
 public class ApiQuery {
 
     /**
-     * ID
-     */
-    @ApiModelProperty(value = "ID", example = "1", required = true)
-    private Long id;
-
-    /**
      * 标签
      */
-    @ApiModelProperty(value = "标签", example = "用户接口服务", required = true, position = 1)
+    @ApiParam(value = "标签", example = "用户接口服务")
     private String label;
 
     /**
      * 名称
      */
-    @ApiModelProperty(value = "API名称", example = "用户服务", required = true, position = 2)
+    @ApiParam(value = "API名称", example = "用户服务")
     private String name;
 
     /**
      * 服务ID
      */
-    @ApiModelProperty(value = "服务ID", example = "服务ID", required = true, position = 3)
+    @ApiParam(value = "服务ID", example = "服务ID")
     private String serviceId;
 
     /**
      * url地址
      */
-    @ApiModelProperty(value = "url", example = "/user/getById", required = true, position = 4)
+    @ApiParam(value = "url", example = "/api/user/getById")
     private String url;
 
     /**
      * 请求类型(POST,GET)
      */
-    @ApiModelProperty(value = "请求类型", example = "POST", required = true, position = 5)
+    @ApiParam(value = "请求类型", example = "POST")
     private String method;
-
-    /**
-     * 描述
-     */
-    @ApiModelProperty(value = "服务描述", example = "服务描述", position = 6)
-    private String description;
-
-    /**
-     * 是否启用：0-不可用，1-可用
-     */
-    @ApiModelProperty(value = "是否启用", example = "0", required = true, position = 7)
-    private Boolean enabled;
-
-    /**
-     * 删除标示：0-未删除，1-已删除
-     */
-    @ApiModelProperty(value = "删除标示", example = "0", position = 8)
-    private Boolean deleted;
 
 }

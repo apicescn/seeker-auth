@@ -22,7 +22,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("oauth_service_api")
-public class ApiDO extends BaseDO implements Serializable {
+public class ApiDO implements Serializable {
 
     private static final long serialVersionUID = -2137319337385990610L;
     /**

@@ -72,23 +72,4 @@ public class ApiDTO implements Serializable {
     @ApiModelProperty(value = "服务描述", example = "服务描述", position = 6)
     private String description;
 
-    /**
-     * 是否启用：0-不可用，1-可用
-     */
-    @ApiModelProperty(value = "是否启用", example = "0", required = true, position = 7)
-    private Boolean enabled;
-
-    /**
-     * 删除标示：0-未删除，1-已删除
-     */
-    @ApiModelProperty(value = "删除标示", example = "0", required = true, position = 8)
-    private Boolean deleted;
-
-    /**
-     * 最后更改时间
-     */
-    @ApiModelProperty(value = "最后更改时间", example = "2018-03-09 11:36:21", required = true, position = 9)
-    @SuppressFBWarnings("EI_EXPOSE_REP")
-    private Date lastModified;
-
 }
