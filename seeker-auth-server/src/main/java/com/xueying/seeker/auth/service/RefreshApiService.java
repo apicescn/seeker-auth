@@ -68,16 +68,13 @@ public class RefreshApiService {
         Boolean result = true;
         List<ServiceInstance> listServiceInstance = new ArrayList<>();
         List<String> services = discoveryClient.getServices();
-        for (String service : services) {
-            listServiceInstance.addAll(discoveryClient.getInstances(service.toUpperCase()));
-        }
-        for (ServiceInstance serviceInstance:listServiceInstance) {
+        services.forEach(service -> listServiceInstance.addAll(discoveryClient.getInstances(service)));
+        for (ServiceInstance serviceInstance : listServiceInstance) {
             String hostIp = serviceInstance.getHost();
             String serviceName = serviceInstance.getServiceId();
             int servicePort = serviceInstance.getPort();
             log.info("host-->" + hostIp + ";serviceName-->" + serviceName + ";port-->" + servicePort);
-            String contextPath
-                = serviceInstance.getMetadata().get("management.context-path").equals("/mgmt") ? "" : "/uaa";
+            String contextPath = "/uaa";
             String swaggerJson;
             try {
                 swaggerJson = restTemplate
