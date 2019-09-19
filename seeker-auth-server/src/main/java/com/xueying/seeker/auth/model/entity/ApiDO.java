@@ -43,7 +43,7 @@ public class ApiDO implements Serializable {
     private String name;
 
     /**
-     * 服务ID号，如：marge-admin-server
+     * 服务ID号，如：seeker-auth-server
      */
     private String serviceId;
 
@@ -58,7 +58,7 @@ public class ApiDO implements Serializable {
     private String method;
 
     /**
-     * 角色描述
+     * API服务描述
      */
     private String description;
 

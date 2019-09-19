@@ -25,7 +25,6 @@ import com.xueying.seeker.common.util.SimpleConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
@@ -33,9 +32,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 客户端rest接口
@@ -181,6 +178,7 @@ public class ClientControllerImpl implements ClientController {
      * @return Map
      */
     @RequestMapping(value = SERVICE_NAME, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
+    @Override
     public List<String> listServiceName() {
         List<String> services = discoveryClient.getServices();
         return services;
