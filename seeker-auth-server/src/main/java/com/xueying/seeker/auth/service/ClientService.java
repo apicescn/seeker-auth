@@ -20,6 +20,7 @@ import com.xueying.seeker.auth.model.entity.ClientDO;
 import com.xueying.seeker.auth.model.query.ClientQuery;
 import com.xueying.seeker.auth.model.query.PageQuery;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +42,9 @@ public class ClientService extends ServiceImpl<ClientDAO, ClientDO> {
     public Boolean insert(ClientQuery clientQuery) {
         ClientDO clientDO = new ClientDO();
         BeanUtils.copyProperties(clientQuery, clientDO);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String bcryPassword = bCryptPasswordEncoder.encode(clientDO.getClientSecret());
+        clientDO.setClientSecret(bcryPassword);
         // TODO 获取当前登录用户的信息，并将该登录用户信息添加到插入客户端的创建属性中
         return save(clientDO);
     }
@@ -51,16 +55,21 @@ public class ClientService extends ServiceImpl<ClientDAO, ClientDO> {
      * @param clientQuery 客户端信息
      * @return 更新记录
      */
-    public Boolean update(ClientQuery clientQuery) {
-        ClientDO clientDO = getById(clientQuery.getClientId());
+    public Boolean update(Long id, ClientQuery clientQuery) {
+        QueryWrapper<ClientDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(true, "client_id", clientQuery.getClientId());
+        ClientDO clientDO = getOne(queryWrapper);
         if (clientDO == null) {
             clientDO = new ClientDO();
         }
         BeanUtils.copyProperties(clientQuery, clientDO);
+        clientDO.setId(id);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String bcryPassword = bCryptPasswordEncoder.encode(clientDO.getClientSecret());
+        clientDO.setClientSecret(bcryPassword);
         // TODO 获取当前登录用户的信息，并将该登录用户信息添加到更新客户端的更新属性中
         return updateById(clientDO);
     }
-
     /**
      * 分页查询
      *
@@ -90,4 +99,38 @@ public class ClientService extends ServiceImpl<ClientDAO, ClientDO> {
         return clientDOList;
     }
 
+    /**
+     * 根据clientId删除
+     * @param clientId clientId
+     * @return
+     */
+    public Boolean removeByClientId(String clientId){
+        QueryWrapper<ClientDO> qwrapper = new QueryWrapper<>();
+        qwrapper.eq(true, "client_id", clientId);
+        return remove(qwrapper);
+    }
+
+    /**
+     * 根据clientId获取详情
+     * @param clientId clientId
+     * @return
+     */
+    public ClientDO getByClientId(String clientId){
+        QueryWrapper<ClientDO> qwrapper = new QueryWrapper<>();
+        qwrapper.eq(true, "client_id", clientId);
+        return getOne(qwrapper);
+    }
+
+    /**
+     * 根据Id、clientId判断ClientID是否存在
+     * @param id 主键ID
+     * @param ClientId 客户端ID
+     * @return Boolean
+     */
+    public ClientDO getById(Long id, String ClientId){
+        QueryWrapper<ClientDO> qwrapper = new QueryWrapper<>();
+        qwrapper.ne(true, "id", id)
+                .eq(true, "client_id", ClientId);
+        return getOne(qwrapper);
+    }
 }

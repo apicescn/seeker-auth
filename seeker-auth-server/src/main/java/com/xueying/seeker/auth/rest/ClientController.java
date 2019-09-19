@@ -32,11 +32,15 @@ public interface ClientController {
     /**
      * 根据ID查询客户端url
      */
-    String GET_CLIENT_BY_ID = "/api/dto/{id}";
+    String GET_CLIENT_BY_ID = "/api/dto/id";
+    /**
+     * 根据ClientID查询客户端url
+     */
+    String GET_CLIENT_BY_CLIENTID = "/api/dto/clientId";
     /**
      * 获取客户端列表url
      */
-    String GET_CLIENT_LIST = "/api/dto/list";
+    String GET_CLIENT_LIST = "/api/dto/clientList";
     /**
      * 客户端数据插入url
      */
@@ -49,6 +53,16 @@ public interface ClientController {
      * 根据客户端ID删除数据url
      */
     String DELETE_CLIENT = "/api/dto/delete";
+    /**
+     * 根据主键ID查询客户端
+     *
+     * @param id ID
+     * @return ClientDO
+     */
+    @ApiOperation(value = "根据主键ID查询客户端", notes = "根据主键ID查询客户端",
+            protocols = "http,https", httpMethod = "GET")
+    SimpleVO<ClientDTO> getClientById(@ApiParam(name = "id", value = "自增id", required = true) Long id
+            , @ApiParam(name = "clientId", value = "客户端ID", required = true) String clientId);
 
     /**
      * 根据客户端ID查询客户端
@@ -58,7 +72,7 @@ public interface ClientController {
      */
     @ApiOperation(value = "根据客户端ID查询客户端", notes = "根据客户端ID查询客户端",
             protocols = "http,https", httpMethod = "GET")
-    SimpleVO<ClientDTO> getClientById(@ApiParam(name = "id", value = "客户端id", required = true) String id);
+    SimpleVO<ClientDTO> getClientByClientId(@ApiParam(name = "id", value = "客户端id", required = true) String id);
 
     /**
      * 根据查询条件查询客户端列表
@@ -84,13 +98,14 @@ public interface ClientController {
 
     /**
      * 更新客户端信息
-     *
+     * @param id 自增ID
      * @param clientQuery 客户端信息
      * @return 操作结果
      */
     @ApiOperation(value = "更新客户端信息", notes = "更新客户端信息", protocols = "http,https", httpMethod = "POST",
         response = RestDTO.class)
-    SimpleVO updateClient(@ApiParam(name = "clientQuery", value = "客户端信息", required = true) ClientQuery clientQuery);
+    SimpleVO updateClient(@ApiParam(name = "id", value = "ID", required = true) Long id,
+            @ApiParam(name = "clientQuery", value = "客户端信息", required = true) ClientQuery clientQuery);
 
     /**
      * 删除客户端

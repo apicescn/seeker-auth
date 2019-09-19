@@ -39,7 +39,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../index2.html" class="logo">
+        <a href="#" class="logo"><#--../index2.html-->
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -58,7 +58,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
+                    <#--<li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
@@ -66,9 +66,9 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 4 messages</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                <!-- inner menu: contains the actual data &ndash;&gt;
                                 <ul class="menu">
-                                    <li><!-- start message -->
+                                    <li><!-- start message &ndash;&gt;
                                         <a href="#">
                                             <div class="pull-left">
                                                 <img src="${request.contextPath}/dist/img/user8-128x128.jpg" class="img-circle"
@@ -81,7 +81,7 @@
                                             <p>Why not buy a new awesome theme?</p>
                                         </a>
                                     </li>
-                                    <!-- end message -->
+                                    <!-- end message &ndash;&gt;
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
@@ -138,9 +138,9 @@
                             </li>
                             <li class="footer"><a href="#">See All Messages</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- Notifications: style can be found in dropdown.less -->
-                    <li class="dropdown notifications-menu">
+                    <#--<li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning">10</span>
@@ -148,7 +148,7 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 10 notifications</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                <!-- inner menu: contains the actual data &ndash;&gt;
                                 <ul class="menu">
                                     <li>
                                         <a href="#">
@@ -181,9 +181,10 @@
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
+                    <#--任务进度通知-->
+                    <#--<li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-flag-o"></i>
                             <span class="label label-danger">9</span>
@@ -191,9 +192,9 @@
                         <ul class="dropdown-menu">
                             <li class="header">You have 9 tasks</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                <!-- inner menu: contains the actual data &ndash;&gt;
                                 <ul class="menu">
-                                    <li><!-- Task item -->
+                                    <li><!-- Task item &ndash;&gt;
                                         <a href="#">
                                             <h3>
                                                 Design some buttons
@@ -208,8 +209,8 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
+                                    <!-- end task item &ndash;&gt;
+                                    <li><!-- Task item &ndash;&gt;
                                         <a href="#">
                                             <h3>
                                                 Create a nice theme
@@ -224,8 +225,8 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
+                                    <!-- end task item &ndash;&gt;
+                                    <li><!-- Task item &ndash;&gt;
                                         <a href="#">
                                             <h3>
                                                 Some task I need to do
@@ -240,8 +241,8 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
+                                    <!-- end task item &ndash;&gt;
+                                    <li><!-- Task item &ndash;&gt;
                                         <a href="#">
                                             <h3>
                                                 Make beautiful transitions
@@ -256,28 +257,28 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- end task item -->
+                                    <!-- end task item &ndash;&gt;
                                 </ul>
                             </li>
                             <li class="footer">
                                 <a href="#">View all tasks</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="${request.contextPath}/dist/img/user8-128x128.jpg" class="user-image" alt="User Image">
+                            <img src="${request.contextPath}/dist/img/logo.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs" >${username}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="${request.contextPath}/dist/img/user8-128x128.jpg" class="img-circle" alt="User Image">
+                                <img src="${request.contextPath}/dist/img/logo.jpg" class="img-circle" alt="User Image">
 
                                 <p>
                                     ${username} - 超级管理员
-                                    <small>注册日期：2019-09-17</small>
+                                    <small>登录时间：${loginTime}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -297,9 +298,9 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
+                                <#--<div class="pull-left">
                                     <a href="#" class="btn btn-default btn-flat">个人资料</a>
-                                </div>
+                                </div>-->
                                 <div class="pull-right">
                                     <a href="${request.contextPath}/logout" class="btn btn-default btn-flat">注销登录</a>
                                 </div>
@@ -307,9 +308,9 @@
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
+                    <#--<li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </nav>
@@ -321,7 +322,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="${request.contextPath}/dist/img/user8-128x128.jpg" class="img-circle" alt="User Image">
+                    <img src="${request.contextPath}/dist/img/logo.jpg" class="img-circle" alt="User Image" style="height: 40px;">
                 </div>
                 <div class="pull-left info">
                     <p>${username}</p>
@@ -342,176 +343,6 @@
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <!--<li class="header">MAIN NAVIGATION</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../indexbak2.ftl"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                        <li><a href="../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>Layout Options</span>
-                        <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                        <li><a href="layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                        <li><a href="layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                        <li><a href="layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <a href="widgets.html">
-                        <i class="fa fa-th"></i> <span>Widgets</span>
-                        <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>Charts</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                        <li><a href="charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                        <li><a href="charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                        <li><a href="charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>UI Elements</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                        <li><a href="UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                        <li><a href="UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                        <li><a href="UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                        <li><a href="UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                        <li><a href="UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>Forms</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                        <li><a href="forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                        <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Tables</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                        <li><a href="tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="calendar.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
-                        <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="mailbox/mailbox.html">
-                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                        <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-folder"></i> <span>Examples</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                        <li><a href="examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                        <li><a href="examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                        <li><a href="examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                        <li><a href="examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                        <li><a href="examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                        <li><a href="examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                        <li><a href="examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                        <li><a href="examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-share"></i> <span>Multilevel</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                        <li>
-                            <a href="#"><i class="fa fa-circle-o"></i> Level One
-                                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                                <li>
-                                    <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                                        <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                    </ul>
-                </li>
-                <li><a href="../documentation/indexbak2.ftl"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>-->
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -529,7 +360,8 @@
 
                 </div>
             </nav>
-            <button class="roll-nav roll-right tabRight" onclick="scrollTabRight()">
+            <#--页签操作-->
+            <#--<button class="roll-nav roll-right tabRight" onclick="scrollTabRight()">
                 <i class="fa fa-forward" style="margin-left: 3px;"></i>
             </button>
             <div class="btn-group roll-nav roll-right">
@@ -542,7 +374,8 @@
                     <li><a class="tabCloseAll" href="javascript:closeOtherTabs(true);">全部关闭</a></li>
                     <li><a class="tabCloseOther" href="javascript:closeOtherTabs();">除此之外全部关闭</a></li>
                 </ul>
-            </div>
+            </div>-->
+            <#--全屏-->
             <button class="roll-nav roll-right fullscreen" onclick="App.handleFullScreen()"><i
                     class="fa fa-arrows-alt"></i></button>
         </div>
@@ -558,7 +391,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.3.8
         </div>
-        <strong>Copyright &copy; 2016-2020 <a href="#">芜湖影通</a>.</strong> All rights
+        <strong>Copyright &copy; 2016-2020 <a href="#">芜湖影通智能科技有限公司</a>.</strong> All rights
         reserved.
     </footer>
 
@@ -774,45 +607,12 @@
 <!--tabs-->
 <script src="${request.contextPath}/dist/js/app_iframe.js"></script>
 
-<!--<script src="../dist/js/jquery.blockui.min.js"></script>
-<script src="../dist/js/appx.js"></script>
-<script src="../dist/js/bootstrap-tab.js"></script>
-<script src="../dist/js/sidebarMenu.js"></script>-->
 
 <script type="text/javascript">
-    /**
-     * 本地搜索菜单
-     */
-/*    function search_menu() {
-        //要搜索的值
-        var text = $('input[name=q]').val();
-
-        var $ul = $('.sidebar-menu');
-        $ul.find("a.nav-link").each(function () {
-            var $a = $(this).css("border", "");
-
-            //判断是否含有要搜索的字符串
-            if ($a.children("span.menu-text").text().indexOf(text) >= 0) {
-
-                //如果a标签的父级是隐藏的就展开
-                $ul = $a.parents("ul");
-
-                if ($ul.is(":hidden")) {
-                    $a.parents("ul").prev().click();
-                }
-
-                //点击该菜单
-                $a.click().css("border", "1px solid");
-
-//                return false;
-            }
-        });
-    }*/
-
     $(function () {
        console.log(window.location);
-        App.setbasePath("..");
-        App.setGlobalImgPath("/dist/img/");
+        App.setbasePath("../");
+        App.setGlobalImgPath("uaa/dist/img/");
 
         addTabs({
             id: '10008',
@@ -824,58 +624,36 @@
 
         App.fixIframeCotent();
 
-        /*addTabs({
-         id: '10009',
-         title: '404',
-         close: true,
-         url: 'UI/buttons_iframe2.html'
-         });*/
-
-        /*
-         <li class="treeview">
-         <a href="#">
-         <i class="fa fa-edit"></i> <span>Forms</span>
-         <span class="pull-right-container">
-         <i class="fa fa-angle-left pull-right"></i>
-         </span>
-         </a>
-         <ul class="treeview-menu">
-         <li><a href="forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-         <li><a href="forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-         <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-         </ul>
-         </li>
-         */
         let menus = [
             {
                 id: "9000",
-                text: "header",
+                text: "",/*header*/
                 icon: "",
                 isHeader: true
             },
             {
                 id: "9001",
                 text: "用户管理",
-                icon: "fa fa-laptop",
+                icon: "fa fa-user-plus",
                 children: [
                     {
                         id: "90011",
-                        text: "buttons",
-                        icon: "fa fa-circle-o",
-                        url: "UI/buttons_iframe.html",
+                        text: "用户登录信息",
+                        icon: "fa fa-user",
+                        url: "user/userInfo",
                         targetType: "iframe-tab"
                     },
                     {
                         id: "90012",
+                        text: "用户配置信息",
+                        url: "user/userDetails",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-wrench"
+                    },
+                    /*{
+                        id: "90013",
                         text: "icons",
                         url: "UI/icons_iframe.html",
-                        targetType: "iframe-tab",
-                        icon: "fa fa-circle-o"
-                    },
-                    {
-                        id: "90013",
-                        text: "general",
-                        url: "UI/general_iframe.html",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     },
@@ -899,29 +677,29 @@
                         url: "UI/timeline_iframe.html",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
-                    }
+                    }*/
                 ]
             },
             {
                 id: "9002",
                 text: "客户端管理配置",
-                icon: "fa fa-edit",
+                icon: "fa fa-laptop",
                 children: [
-                    {
+                    /*{
                         id: "90021",
-                        text: "advanced",
+                        text: "客户端查询",
                         url: "forms/advanced_iframe.html",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
-                    },
+                    },*/
                     {
                         id: "90022",
-                        text: "general",
-                        url: "forms/general_iframe.html",
+                        text: "客户端管理",
+                        url: "client/clientDetails",
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o"
                     },
-                    {
+                   /* {
                         id: "90023",
                         text: "editors",
                         url: "forms/editors_iframe.html",
@@ -935,28 +713,11 @@
                         targetType: "iframe-tab",
                         icon: "fa fa-circle-o",
                         urlType: 'abosulte'
-                    }
+                    }*/
                 ]
             }
         ];
         $('.sidebar-menu').sidebarMenu({data: menus});
-
-        // 动态创建菜单后，可以重新计算 SlimScroll
-        // $.AdminLTE.layout.fixSidebar();
-
-        /*if ($.AdminLTE.options.sidebarSlimScroll) {
-            if (typeof $.fn.slimScroll != 'undefined') {
-                //Destroy if it exists
-                var $sidebar = $(".sidebar");
-                $sidebar.slimScroll({destroy: true}).height("auto");
-                //Add slimscroll
-                $sidebar.slimscroll({
-                    height: ($(window).height() - $(".main-header").height()) + "px",
-                    color: "rgba(0,0,0,0.2)",
-                    size: "3px"
-                });
-            }
-        }*/
 
     });
 </script>
