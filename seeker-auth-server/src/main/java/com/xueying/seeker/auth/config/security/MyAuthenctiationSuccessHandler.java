@@ -21,7 +21,8 @@ import java.io.IOException;
 public class MyAuthenctiationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+                                        HttpServletResponse response, Authentication authentication)
+            throws ServletException, IOException {
         response.setContentType("application/json;charset=utf-8");
 
         RequestCache cache = new HttpSessionRequestCache();

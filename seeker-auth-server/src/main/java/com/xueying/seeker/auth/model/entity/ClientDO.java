@@ -10,6 +10,7 @@
  */
 package com.xueying.seeker.auth.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -29,8 +30,9 @@ public class ClientDO implements Serializable {
     /**
      * 自增Id
      */
-    @TableField(value = "id")
+    @TableId(type = IdType.AUTO, value = "id")
     private Long id;
+
     /** 用于客户端唯一标识 */
     @TableField(value = "client_id")
     private String clientId;

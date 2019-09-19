@@ -19,10 +19,8 @@ import com.xueying.seeker.common.core.model.dto.SimpleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.cloud.client.ServiceInstance;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * ClientController接口服务

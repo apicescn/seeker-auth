@@ -10,14 +10,12 @@
  */
 package com.xueying.seeker.auth.model.dto;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * API返回DTO
