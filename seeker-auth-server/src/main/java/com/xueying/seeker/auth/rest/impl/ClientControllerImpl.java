@@ -25,13 +25,17 @@ import com.xueying.seeker.common.util.SimpleConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 客户端rest接口
@@ -47,7 +51,12 @@ public class ClientControllerImpl implements ClientController {
      */
     @Autowired
     private ClientService clientService;
-
+    /**
+     * 获取每一个服务下面实例
+     * 测试时，可以使用多个端口启动服务实例
+     */
+    @Autowired
+    private DiscoveryClient discoveryClient;
     /**
      * 根据主键ID查询客户端
      * @param id ID
@@ -161,5 +170,24 @@ public class ClientControllerImpl implements ClientController {
             simpleVO = new SimpleVO(CodeEnum.DELETE_FAILED);
         }
         return simpleVO;
+    }
+
+
+    /**
+     * <P>
+     *     获取服务列表
+     * </P>
+     *
+     * @return Map
+     */
+    @RequestMapping(value = SERVICE_URL, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
+    public Map<String, List<ServiceInstance>> listServiceUrl() {
+        Map<String, List<ServiceInstance>> msl = new HashMap<>();
+        List<String> services = discoveryClient.getServices();
+        for (String service : services) {
+            List<ServiceInstance> sis = discoveryClient.getInstances(service);
+            msl.put(service, sis);
+        }
+        return msl;
     }
 }

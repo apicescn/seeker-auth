@@ -19,8 +19,10 @@ import com.xueying.seeker.common.core.model.dto.SimpleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.cloud.client.ServiceInstance;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * ClientController接口服务
@@ -53,6 +55,10 @@ public interface ClientController {
      * 根据客户端ID删除数据url
      */
     String DELETE_CLIENT = "/api/dto/delete";
+    /**
+     * 获取每一个服务下面实例服务ID
+     */
+    String SERVICE_URL = "/api/dto/serviceUrl";
     /**
      * 根据主键ID查询客户端
      *
@@ -116,5 +122,13 @@ public interface ClientController {
     @ApiOperation(value = "删除客户端", notes = "删除客户端", protocols = "http,https", httpMethod = "POST",
         response = RestDTO.class)
     SimpleVO deleteClient(@ApiParam(name = "clientId", value = "客户端Id", required = true) String id);
+    /**
+     * 服务ID列表
+     *
+     * @return 服务ID列表
+     */
+    @ApiOperation(value = "服务ID列表", notes = "服务ID列表",
+            protocols = "http,https", httpMethod = "GET")
+    Map<String, List<ServiceInstance>> listServiceUrl();
 
 }
