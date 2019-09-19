@@ -102,7 +102,7 @@
                     <option value=""></option>
                     <option value="password">password</option>
                     <option value="client_credentials">client_credentials</option>
-                    <option value="password">authorization_code</option>
+                    <option value="authorization_code">authorization_code</option>
                 </select>
 
             </div>
