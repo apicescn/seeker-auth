@@ -10,6 +10,7 @@
  */
 package com.xueying.seeker.auth.model.query;
 
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
 
@@ -21,6 +22,12 @@ import lombok.Data;
  */
 @Data
 public class ApiQuery {
+
+    /**
+     * ID
+     */
+    @ApiModelProperty(value = "ID", example = "1", required = true)
+    private Long id;
 
     /**
      * 标签
@@ -52,4 +59,9 @@ public class ApiQuery {
     @ApiParam(value = "请求类型", example = "POST")
     private String method;
 
+    /**
+     * 描述
+     */
+    @ApiModelProperty(value = "服务描述", example = "服务描述", position = 6)
+    private String description;
 }
