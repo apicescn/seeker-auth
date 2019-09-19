@@ -9,6 +9,7 @@
  * 作者姓名           修改时间           版本号              描述
  */
 package com.xueying.seeker.auth.controller;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,53 +27,69 @@ import java.util.Calendar;
  * @date 2019-09-10
  */
 @Controller
-public class indexController {
+@Slf4j
+public class IndexController {
+
+    /**
+     * 主页面跳转
+     * @param model mvcModel
+     * @param user 登陆用户
+     * @return 主页面跳转
+     */
     @RequestMapping(value = "/loginSuccess")
     public String  index(Model model,  Principal user) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(user);
+        log.debug("当前登陆用户信息为---> " + user);
         //主体名，即登录用户名
         String name = auth.getName();
         model.addAttribute("username", name);
-        Calendar calendar= Calendar.getInstance();
-        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm");
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd :hh:mm");
         model.addAttribute("loginTime", dateFormat.format(calendar.getTime()));
         return "index";
     }
-    //用户登录信息
+
+    /**
+     * 用户登录信息
+     * @return 登录信息
+     */
     @RequestMapping(value = "user/userInfo")
-    public String userLoginInfo(){
+    public String userLoginInfo() {
         return "user/user_info";
     }
-    //用户配置详细信息
+
+    /**
+     * 用户配置详细信息
+     * @return 用户配置详情信息
+     */
     @RequestMapping(value = "user/userDetails")
-    public String userDetails(){
+    public String userDetails() {
         return "user/user_details";
     }
 
     /**
      * 客户端管理页面跳转
-     * @return
+     * @return 客户端详情信息
      */
     @RequestMapping(value = "client/clientDetails")
-    public String clientDetails(){
+    public String clientDetails() {
         return "client/client_details";
     }
 
     /**
      * 客户端添加
-     * @return
+     * @return 添加客户端
      */
     @RequestMapping("client/addClient")
-    public  String addClient(){
+    public  String addClient() {
         return "client/add";
     }
     /**
      * 客户端编辑
-     * @return
+     * @return 编辑客户端
      */
     @RequestMapping("client/editClient")
-    public  String editClient(){
+    public  String editClient() {
         return "client/edit";
     }
 }
