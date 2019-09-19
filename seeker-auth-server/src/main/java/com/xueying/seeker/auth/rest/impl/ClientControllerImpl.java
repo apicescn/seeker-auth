@@ -181,13 +181,8 @@ public class ClientControllerImpl implements ClientController {
      * @return Map
      */
     @RequestMapping(value = SERVICE_URL, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
-    public Map<String, List<ServiceInstance>> listServiceUrl() {
-        Map<String, List<ServiceInstance>> msl = new HashMap<>();
+    public List<String> listServiceUrl() {
         List<String> services = discoveryClient.getServices();
-        for (String service : services) {
-            List<ServiceInstance> sis = discoveryClient.getInstances(service);
-            msl.put(service, sis);
-        }
-        return msl;
+        return services;
     }
 }

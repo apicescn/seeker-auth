@@ -158,7 +158,7 @@
             success: function (result) {
                 resultData = result;
                 for(var x in resultData){
-                    htmls += '<option value = "' + x + '">' + x + '</option>'
+                    htmls += '<option value = "' + resultData[x] + '">' + resultData[x]  + '</option>'
                 }
                 $("#resourceIds").html(htmls);
             }

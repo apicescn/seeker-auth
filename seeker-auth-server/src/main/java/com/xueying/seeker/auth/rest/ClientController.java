@@ -129,6 +129,6 @@ public interface ClientController {
      */
     @ApiOperation(value = "服务ID列表", notes = "服务ID列表",
             protocols = "http,https", httpMethod = "GET")
-    Map<String, List<ServiceInstance>> listServiceUrl();
+    List<String> listServiceUrl();
 
 }
