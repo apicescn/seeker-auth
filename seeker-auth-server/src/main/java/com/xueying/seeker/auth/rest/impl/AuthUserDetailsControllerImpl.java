@@ -10,12 +10,9 @@
  */
 package com.xueying.seeker.auth.rest.impl;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xueying.seeker.auth.config.feign.UserDetailsClientProperties;
-import com.xueying.seeker.auth.config.page.PageBean;
 import com.xueying.seeker.auth.rest.AuthUserDetailsController;
 import com.xueying.seeker.common.core.constant.CodeEnum;
 import com.xueying.seeker.common.core.model.dto.SimplePageVO;
@@ -23,7 +20,9 @@ import com.xueying.seeker.common.util.SimpleConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class AuthUserDetailsControllerImpl implements AuthUserDetailsController 
     @Override
     @RequestMapping(value = GET_USER_DETAILS, method = RequestMethod.POST)
     @ResponseBody
-    public SimplePageVO<List<UserDetailsClientProperties.FeignClientProperties>> userDetails(){
+    public SimplePageVO<List<UserDetailsClientProperties.FeignClientProperties>> userDetails() {
         SimplePageVO<List<UserDetailsClientProperties.FeignClientProperties>> simplePageVO =
                 new SimplePageVO<>(CodeEnum.DATA_NOT_FOUND);
         List<UserDetailsClientProperties.FeignClientProperties> list = properties.getClients();
