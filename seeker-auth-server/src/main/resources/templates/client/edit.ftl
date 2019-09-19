@@ -59,10 +59,6 @@
                 <select name="resourceIds" id="resourceIds"
                         lay-filter="select_resourceIds"
                         xm-select="_resourceIds" xm-select-type="1">
-                    <option value=''></option>
-                    <option value='xysy-seeker'>xysy-seeker</option>
-                    <option value='seeker-web'>seeker-web</option>
-                    <option value='seeker-auth-server'>seeker-auth-server</option>
                 </select>
 
             </div>
@@ -83,14 +79,15 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">oauth授权类型</label>
+            <label class="layui-form-label">授权模式</label>
             <div class="layui-input-block" style="width:200px" xm-select-type="1">
                 <select name="authorizedGrantTypes" id="authorizedGrant"
                         lay-filter="select_authorizedGrantTypes"
                         xm-select="_authorizedGrantTypes" xm-select-type="1">
                     <option value=''></option>
-                    <option value='client_credentials'>client_credentials</option>
-                    <option value='password'>password</option>
+                    <option value="password">password</option>
+                    <option value="client_credentials">client_credentials</option>
+                    <option value="authorization_code">authorization_code</option>
                 </select>
 
             </div>
@@ -98,14 +95,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色编码</label>
             <div class="layui-input-block">
-                <input type="text" name="authorities" required lay-verify="required" placeholder="角色编码"
+                <input type="text" name="authorities" required lay-verify="required" placeholder="角色编码(默认:ADMIN)"
                        class="layui-input" id="authorities" style="width:200px">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">初始超期时间</label>
             <div class="layui-input-block">
-                <input type="text" name="accessTokenValidity" required lay-verify="required" placeholder="初始超期时间"
+                <input type="text" name="accessTokenValidity" required lay-verify="required" placeholder="初始超期时间(单位：毫秒)"
                        class="layui-input" id="accessTokenValidity" style="width:200px">
             </div>
         </div>
@@ -129,8 +126,26 @@
 <script src="${request.contextPath}/dist/plugins/layui/formSelects-v4.js"></script>
 <script type="text/javascript">
     var formSelects = layui.formSelects;
-
+    var resultData;
     $(function () {
+        var htmls = '<option value="">请选择</option>'; //全局变量
+        $.ajax({
+            url: "${request.contextPath}/api/dto/serviceName",
+            type: "post",
+            dataType : "json",
+            contentType : "application/json",
+            async: false,//这得注意是同步
+            success: function (result) {
+                resultData = result;
+                for(var x in resultData){
+                    htmls += '<option value = "' + resultData[x] + '">' + resultData[x] + '</option>'
+                }
+                $("#resourceIds").html(htmls);
+            }
+        });
+        formSelects.render('_resourceIds');//需要渲染一下
+
+
         var parent_json = eval('(' + parent.json + ')');
         var _json = eval('(' + parent_json + ')');
         var data = _json.data

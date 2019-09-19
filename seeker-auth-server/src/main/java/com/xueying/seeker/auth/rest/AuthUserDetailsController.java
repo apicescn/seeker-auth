@@ -32,7 +32,7 @@ public interface AuthUserDetailsController {
     String GET_USER_DETAILS = "/api/userDetails/list";
 
     /**
-     *
+     *查询UserDetails
      * @return List<FeignClientProperties>
      */
     @ApiOperation(value = "用户详情信息查询", notes = "用户详情信息查询", protocols = "http,https", httpMethod = "GET")
