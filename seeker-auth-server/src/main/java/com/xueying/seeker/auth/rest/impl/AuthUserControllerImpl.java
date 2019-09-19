@@ -10,13 +10,11 @@
  */
 package com.xueying.seeker.auth.rest.impl;
 
-import java.security.Principal;
-
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.xueying.seeker.auth.rest.AuthUserController;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.xueying.seeker.auth.rest.AuthUserController;
+import java.security.Principal;
 
 /**
  * 获取用户信息
@@ -35,9 +33,7 @@ public class AuthUserControllerImpl implements AuthUserController {
      * @return Principal
      */
     @Override
-    @RequestMapping(value = GET_USER)
     public Principal user(Principal user) {
-        System.out.println(user);
         return user;
     }
 }
