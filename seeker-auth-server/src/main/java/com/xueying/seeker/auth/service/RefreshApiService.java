@@ -74,6 +74,7 @@ public class RefreshApiService {
             String serviceName = serviceInstance.getServiceId();
             int servicePort = serviceInstance.getPort();
             log.info("host-->" + hostIp + ";serviceName-->" + serviceName + ";port-->" + servicePort);
+            //TODO 此处需获得各个服务的contextPath，否则无法调用/v2/api-docs
             String contextPath = "/uaa";
             String swaggerJson;
             try {
