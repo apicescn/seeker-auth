@@ -715,6 +715,19 @@
                         urlType: 'abosulte'
                     }*/
                 ]
+            },
+            {
+                id: "9003",
+                text: "API接口服务",
+                icon: "fa fa-laptop",
+                children: [
+                    {
+                        id: "90031",
+                        text: "API接口列表",
+                        url: "api/apiList",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    }]
             }
         ];
         $('.sidebar-menu').sidebarMenu({data: menus});

@@ -95,3 +95,17 @@ CREATE TABLE oauth_approvals (
 #     additionalInformation VARCHAR(4096),
 #     autoApproveScopes VARCHAR(256)
 # );
+/*==============================================================*/
+/* Table: oauth_service_api                 */
+/*==============================================================*/
+CREATE TABLE `oauth_service_api` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `label` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签',
+  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `serviceId` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `url` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'url地址',
+  `method` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '请求类型(POST,GET)',
+  `description` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '角色描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+

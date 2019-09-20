@@ -81,7 +81,7 @@ public class IndexController {
      * @return 添加客户端
      */
     @RequestMapping("client/addClient")
-    public  String addClient() {
+    public String addClient() {
         return "client/add";
     }
     /**
@@ -89,7 +89,16 @@ public class IndexController {
      * @return 编辑客户端
      */
     @RequestMapping("client/editClient")
-    public  String editClient() {
+    public String editClient() {
         return "client/edit";
+    }
+
+    /**
+     * Api接口列表
+     * @return 接口列表
+     */
+    @RequestMapping("api/apiList")
+    public String apiService(){
+        return "api/api_service";
     }
 }
