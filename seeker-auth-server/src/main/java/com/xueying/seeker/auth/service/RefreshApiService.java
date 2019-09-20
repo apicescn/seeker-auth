@@ -23,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.xueying.seeker.auth.rest.constant.ServiceListConstant.*;
+
 /**
  * 通过restTemplate来调用swagger接口数据动态刷入API接口数据
  * @author Allen
@@ -77,11 +79,11 @@ public class RefreshApiService {
             //TODO 此处需获得各个服务的contextPath，否则无法调用/v2/api-docs
             String contextPath;
             switch (serviceName) {
-                case "xysy-seeker":
-                    contextPath = "/seeker";
+                case XYSY_SEEKER:
+                    contextPath = SEEKER_CONTEXT_PATH;
                     break;
-                case "seeker-auth-server":
-                    contextPath = "/uaa";
+                case SEEKER_AUTH_SERVER:
+                    contextPath = SEEKER_AUTH_CONTEXT_PATH;
                     break;
                 default:
                     contextPath = "/";
