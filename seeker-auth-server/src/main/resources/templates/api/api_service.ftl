@@ -49,42 +49,42 @@
 <div class="box-body">
     <div class="clearfix">
         <form class="form-horizontal">
-            <input id="client_list_repeatApply" name="client_list_repeatApply" type="reset" style="display:none;"/>
+            <input id="api_list_repeatApply" name="api_list_repeatApply" type="reset" style="display:none;"/>
             <div class="form-group clearfix">
                 <#--<label class="col-md-1  control-label">客户端ID</label>-->
                 <div class="col-md-2">
-                    <input type="text" class="input-sm form-control" id="client_name" name="client_name"
-                           placeholder="请输入客户端ID...">
+                    <input type="text" class="input-sm form-control" id="api_name" name="api_name"
+                           placeholder="请输入Api名称...">
                 </div>
                 <#--<label class="col-md-1  control-label">用户名</label>
                 <div class="col-md-2">
                     <input type="text" class="input-sm form-control" id="user_list_true_name" name="user_list_true_name"
                            placeholder="请输入用户名...">
                 </div>-->
-                <button type="button" onclick="client_list_query();" class="btn btn-sm btn-primary"><i
+                <button type="button" onclick="api_list_query();" class="btn btn-sm btn-primary"><i
                             class="fa fa-search"></i>搜索
                 </button>
-                <button type="button" class="btn btn-sm btn-success" onclick="client_list_add();">
-                    <i class="fa fa-plus"></i>增加
-                </button>
-                <button type="button" onclick="client_list_delete('##');" class="btn btn-sm btn-danger"><i
+                <button id="delete" type="button" onclick="api_list_delete('##');" class="btn btn-sm btn-danger"><i
                             class="fa fa-remove"></i>删除
                 </button>
                 <button type="button" onclick="client_list_reset();" class="btn btn-sm btn-default">重置</button>
+                <button type="button" class="btn btn-sm btn-success" style="float: right; margin-right: 20px" onclick="api_refresh();">
+                    <i class="fa fa-refresh"></i>刷新
+                </button>
             </div>
         </form>
     </div>
-    <table id="client_tab" class="table table-striped table-bordered table-hover">
+    <table id="api_tab" class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
             <th><input type="checkbox" title="全选"/></th>
-            <th>客户端ID</th>
-            <th>服务ID集合</th>
-            <th>密钥</th>
-            <th>访问域</th>
-            <th>授权模式</th>
-            <th>角色编码</th>
-            <th>初始超期时间</th>
+            <th>ID</th>
+            <th>标签</th>
+            <th>名称</th>
+            <th>服务ID号</th>
+            <th>url地址</th>
+            <th>请求类型</th>
+            <th>API服务描述</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -110,15 +110,15 @@
 <script src="${request.contextPath}/dist/plugins/layui/layui.all.js"></script>
 
 <script type="text/javascript">
-    var client_tab;
+    var api_tab;
     var client_param;
     var jsonData;
     // language=JQuery-CSS
     $(function () {
         //不显示
-        var url = "${request.contextPath}/api/dto/clientList";
-        client_list_setParm();
-        client_tab = $("#client_tab").DataTable({
+        var url = "${request.contextPath}/api/api/list";
+        api_list_setParm();
+        api_tab = $("#api_tab").DataTable({
             "fnDrawCallback": function () {
             },
             "dom": '<"top"i>rt<"bottom"flp><"clear">',
@@ -170,10 +170,11 @@
                 }
             },
             "columns": [
-                {"data": "clientId"},
-                {"data": "clientId"},
-                {"data": "resourceIds"},
-                {
+                {"data": "id"},
+                {"data": "id"},
+                {"data": "label"},
+                {"data": "name"},
+                /*{
                     "data": "clientSecret",
                     render: function (data, type, row, meta) {
                         //type 的值  dispaly sort filter
@@ -189,12 +190,12 @@
                         }
                         return data;
                     }
-                },
-                {"data": "scope"},
-                {"data": "authorizedGrantTypes"},
-                {"data": "authorities"},
-                {"data": "accessTokenValidity"},
-                {"data": "clientId"}
+                },*/
+                {"data": "serviceId"},
+                {"data": "url"},
+                {"data": "method"},
+                {"data": "description"},
+                {"data": "id"}
             ]
             ,
             "columnDefs": [
@@ -206,23 +207,15 @@
                         return '<input type="checkbox" class="userCheckbox" value="' + data + '"/>';
                     }
                 },
-             /*   {
-                    targets: 3,
-                    data: null,
-                    orderable: false,
-                    render: function (data) {
-                        return '*****';
-                    }
-                },*/
                 {
                     "targets": -1,
                     "data": null,
                     orderable: false,
                     "render": function (data) {
                         var data = "'" + data + "'";
-                        var btn1 = '<a class="btn btn-xs btn-warning"  target="modal" modal="hg" onclick="client_list_edit(' + data + ');"><i class="fa fa-edit"></i>修改</a> &nbsp;';
-                        var btn2 = '<a class="btn btn-xs btn-danger"  target="modal" modal="hg" onclick="client_list_delete(' + data + ')"><i class="fa fa-remove"></i>删除</a> &nbsp;';
-                        return btn1 + btn2;
+                        var btn1 = '<a class="btn btn-xs btn-warning"  target="modal" modal="hg" onclick="api_details(' + data + ');"><i class="fa fa-edit"></i>详情</a> &nbsp;';
+                        /*var btn2 = '<a class="btn btn-xs btn-danger"  target="modal" modal="hg" onclick="api_list_delete(' + data + ')"><i class="fa fa-remove"></i>删除</a> &nbsp;';*/
+                        return btn1;
                     }
                 }
             ]
@@ -238,30 +231,24 @@
 
     //搜索框内容重置
     function client_list_reset() {
-        $("input[name='client_list_repeatApply']").click();
+        $("input[name='api_list_repeatApply']").click();
     }
 
-    //增加
-    function client_list_add() {
-        layer.open({
-            type: 2, //0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层)
-            area: ['400px', '600px'],
-            title: '新增',
-            content: '${request.contextPath}/client/addClient',
-            shade: 0,
-            /*  btn: ['提交', '取消']
-              ,btn1: function(index, layero){
-                  var kk=$("#username").val();
-                  alert(kk);
-              },
-              btn2: function(index, layero){
-                  layer.closeAll();
-              },
-              cancel: function(layero,index){
-                  layer.closeAll();
-              }
-  */
-        });
+    //api刷新
+    function api_refresh() {
+        var index1 = layer.load(1, {shade: false}); //0代表加载的风格，支持0-2
+        var options = {
+            url: '${request.contextPath}/api/api/refresh/auto',
+            type: 'post',
+            dataType: 'text',
+            success: function (res) {
+                console.log('刷新成功')
+                window.setTimeout(function () {
+                    layer.close(index1);
+                }, 500);
+            }
+        };
+        $.ajax(options);
     }
 
     /*编辑*/
@@ -304,27 +291,9 @@
     }
 
     //删除
-    function client_list_delete(param) {
-        var href = "/";
-        var title = "<p>警告！ 所选取的数据将会被删除！</p>";
-        var cb;
-        if (param == "##") {
-            var checkNum = $('input:checkbox[class="userCheckbox"]:checked').length;
-            var checkVal = [];
-            if (checkNum == 0) {
-                layer.msg('请选择数据', {time: 3000, icon: 6});
-                return;
-            }
-            $.each($('input:checkbox[class="userCheckbox"]:checked'), function () {
-                checkVal.push($(this).val());
-            });
-            cb = "user_list_delete_data('" + checkVal + "');";
-        } else {
-            //cb = "client_list_delete_one_data('" + param + "');";
-            client_list_delete_one_data(param);
-        }
-        //$("#smModal").attr("action", href).attr("callback", cb).find(".modal-body").html(title).end().modal("show");
-        //$("#smModal").modal("show");
+    function api_list_delete(param) {
+        layer.tips('暂不支持', '#delete');
+        return;
     }
 
     function user_list_delete_data(checkVal) {
@@ -335,7 +304,7 @@
             dataType: 'text',
             success: function (data) {
                 if (data > 0) {
-                    client_tab.draw(false);
+                    api_tab.draw(false);
                     alertMsg("<p>成功删除" + data + "条记录</p>", "success");
                 } else {
                     alertMsg("<p>删除失败</p>", "danger");
@@ -355,7 +324,7 @@
                 type: 'get',
                 dataType: 'text',
                 success: function (success) {
-                    client_tab.draw(false);
+                    api_tab.draw(false);
                     layer.msg('删除成功', {time: 2000, icon: 6});
                 }
             };
@@ -365,30 +334,22 @@
     }
 
     //搜索
-    function client_list_query() {
-        client_list_setParm();
-        client_tab.settings()[0].ajax.data = client_param;
-        client_tab.ajax.reload();
+    function api_list_query() {
+        api_list_setParm();
+        api_tab.settings()[0].ajax.data = client_param;
+        api_tab.ajax.reload();
     }
     //动态拼接参数
-    function client_list_setParm() {
-        var client_name = $("#client_name").val() == '' ? null : $("#client_name").val();
-        console.log(client_name)
+    function api_list_setParm() {
+        var api_name = $("#api_name").val() == '' ? null : $("#api_name").val();
+        console.log(api_name)
         client_param = {
             "pageIndex": 1,
             "pageSize": 10
         }
-        if (client_name != null) {
-            client_param["clientId"] = client_name
+        if (api_name != null) {
+            client_param["name"] = api_name
         }
-        /*client_param = client_name == null ? {
-            "pageIndex": 1,
-            "pageSize": 10
-        } : {
-            "clientId": client_name,
-            "pageIndex": 1,
-            "pageSize": 10
-        };*/
     }
 </script>
 </body>

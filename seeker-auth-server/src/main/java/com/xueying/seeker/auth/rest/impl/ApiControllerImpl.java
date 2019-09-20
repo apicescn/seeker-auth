@@ -76,18 +76,18 @@ public class ApiControllerImpl implements ApiController {
     /**
      * 查询API接口列表
      *
-     * @param apiQuery 参数
+     * @param apiQuery  参数
      * @param pageQuery 分页参数
      * @return API接口列表
      */
-    @GetMapping(value = GET_API_LIST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = GET_API_LIST, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
     @Override
     public SimplePageVO<List<ApiDTO>> getApiByPage(@Valid ApiQuery apiQuery, PageQuery pageQuery) {
-        if (pageQuery.getPageIndex() == 0) {
-            pageQuery.setPageIndex(RestConstant.DEFAULT_PAGE_INDEX);
+        if (pageQuery.getStart() != null) {
+            pageQuery.setPageIndex(pageQuery.getStart() / 10 + 1);
         }
-        if (pageQuery.getPageSize() == 0) {
-            pageQuery.setPageSize(RestConstant.DEFAULT_PAGE_SIZE);
+        if (pageQuery.getLength() != null) {
+            pageQuery.setPageSize(pageQuery.getLength());
         }
 
         IPage<ApiDO> page = apiService.selectListPage(apiQuery, pageQuery);
@@ -105,7 +105,7 @@ public class ApiControllerImpl implements ApiController {
      *
      * @return 数据刷新是否成功
      */
-    @GetMapping(value = GET_API_REFRESH_AUTO, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = GET_API_REFRESH_AUTO, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
     @Override
     public SimpleVO autoRefreshApi() {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);
@@ -123,7 +123,7 @@ public class ApiControllerImpl implements ApiController {
      * @return API接口信息
      */
     @PostMapping(value = INSERT_API, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     @Override
     public SimpleVO insertApi(@Valid ApiQuery apiQuery) {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);
@@ -141,7 +141,7 @@ public class ApiControllerImpl implements ApiController {
      * @return API接口信息
      */
     @PostMapping(value = UPDATE_API, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     @Override
     public SimpleVO updateApi(@Valid ApiQuery apiQuery) {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);
@@ -159,7 +159,7 @@ public class ApiControllerImpl implements ApiController {
      * @return 删除API接口
      */
     @PostMapping(value = DELETE_API, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-        produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     @Override
     public SimpleVO deleteApi(@RequestParam("id") Long id) {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);

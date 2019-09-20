@@ -29,37 +29,43 @@ public class ApiDO implements Serializable {
      * ID
      */
     @TableId(type = IdType.AUTO)
+    @TableField(value = "id")
     private Long id;
 
     /**
      * 标签
      */
+    @TableField(value = "label")
     private String label;
 
     /**
      * 名称
      */
-    @TableField(condition = SqlCondition.LIKE)
+    @TableField(condition = SqlCondition.LIKE, value = "name")
     private String name;
 
     /**
      * 服务ID号，如：seeker-auth-server
      */
+    @TableField(value = "serviceId")
     private String serviceId;
 
     /**
      * url地址
      */
+    @TableField(value = "url")
     private String url;
 
     /**
      * 请求类型(POST,GET)
      */
+    @TableField(value = "method")
     private String method;
 
     /**
      * API服务描述
      */
+    @TableField(value = "description")
     private String description;
 
 }

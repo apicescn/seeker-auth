@@ -39,4 +39,14 @@ public class PageQuery implements Serializable {
     @ApiParam(value = "页码", example = "10", required = true)
     @NotNull
     private Integer pageSize;
+    /**
+     * 开始页
+     */
+    @ApiParam(value = "开始页", example = "10")
+    private Integer start;
+    /**
+     * 每页长度
+     */
+    @ApiParam(value = "每页长度", example = "10")
+    private Integer length;
 }
