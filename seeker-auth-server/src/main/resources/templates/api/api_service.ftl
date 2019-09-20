@@ -81,9 +81,9 @@
                 <button type="button" onclick="api_list_query();" class="btn btn-sm btn-primary"><i
                             class="fa fa-search"></i>搜索
                 </button>
-                <button id="delete" type="button" onclick="api_list_delete('##');" class="btn btn-sm btn-danger"><i
+                <#--<button id="delete" type="button" onclick="api_list_delete('##');" class="btn btn-sm btn-danger"><i
                             class="fa fa-remove"></i>删除
-                </button>
+                </button>-->
                 <button type="button" onclick="api_list_reset();" class="btn btn-sm btn-default">重置</button>
                 <button type="button" class="btn btn-sm btn-success" style="float: right; margin-right: 20px"
                         onclick="api_refresh();">
@@ -95,7 +95,6 @@
     <table id="api_tab" class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-            <th ><input type="checkbox" title="全选"/></th>
             <th>ID</th>
             <th width="10%">标签</th>
             <th>名称</th>
@@ -160,15 +159,12 @@
             "processing": true,
             "searching": false,
             "serverSide": true,   //启用服务器端分页
-            "order": [[5, "asc"]],//默认排序字段
+            //默认排序字段
+            "order": [[5, "asc"]],
             "bInfo": true,
             "bAutoWidth": false,
             "scrollX": true,
             "scrollCollapse": false,
-            /*fixedColumns:   {
-                leftColumns: 0,
-                rightColumns: 1
-            },*/
             "language": {
 
                 "sProcessing": "正在加载中......",
@@ -204,7 +200,6 @@
                 }
             },
             "columns": [
-                {"data": "id"},
                 {"data": "id"},
                 {
                     "data": "label",
@@ -267,14 +262,6 @@
             ]
             ,
             "columnDefs": [
-                {
-                    targets: 0,
-                    data: null,
-                    orderable: false,
-                    render: function (data) {
-                        return '<input type="checkbox" class="userCheckbox" value="' + data + '"/>';
-                    }
-                },
                 {
                     "targets": -1,
                     "data": null,
