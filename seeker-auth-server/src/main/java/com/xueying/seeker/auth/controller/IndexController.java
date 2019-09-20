@@ -101,4 +101,12 @@ public class IndexController {
     public String apiService() {
         return "api/api_service";
     }
+    /**
+     * Api接口详情
+     * @return 接口详情
+     */
+    @RequestMapping("api/details")
+    public String apiDetail() {
+        return "api/details";
+    }
 }

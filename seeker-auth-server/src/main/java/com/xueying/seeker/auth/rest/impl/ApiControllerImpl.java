@@ -19,7 +19,6 @@ import com.xueying.seeker.auth.rest.ApiController;
 import com.xueying.seeker.auth.service.ApiService;
 import com.xueying.seeker.auth.service.RefreshApiService;
 import com.xueying.seeker.common.core.constant.CodeEnum;
-import com.xueying.seeker.common.core.model.dto.SimplePageVO;
 import com.xueying.seeker.common.core.model.dto.SimpleVO;
 import com.xueying.seeker.common.util.SimpleConverter;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +29,11 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static com.xueying.seeker.auth.rest.constant.RestConstant.DEFAULT_PAGE_INDEX;
 import static com.xueying.seeker.auth.rest.constant.RestConstant.DEFAULT_PAGE_SIZE;
 
 /**
@@ -62,9 +64,9 @@ public class ApiControllerImpl implements ApiController {
      * @param id API接口ID
      * @return API接口信息
      */
-    @GetMapping(value = GET_API_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = GET_API_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
     @Override
-    public SimpleVO<ApiDTO> getApiById(@PathVariable("id") Long id) {
+    public SimpleVO<ApiDTO> getApiById(@RequestParam("id") Long id) {
         ApiDO apiDO = apiService.getById(id);
         if (apiDO == null) {
             return new SimpleVO<>(CodeEnum.DATA_NOT_FOUND);
@@ -83,22 +85,26 @@ public class ApiControllerImpl implements ApiController {
      */
     @RequestMapping(value = GET_API_LIST, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
     @Override
-    public SimplePageVO<List<ApiDTO>> getApiByPage(@Valid ApiQuery apiQuery, PageQuery pageQuery) {
+    public Map<String, Object> getApiByPage(@Valid ApiQuery apiQuery, PageQuery pageQuery) {
         if (pageQuery.getStart() != null) {
-            pageQuery.setPageIndex(pageQuery.getStart() / DEFAULT_PAGE_SIZE + 1);
+            pageQuery.setPageIndex(pageQuery.getStart() / DEFAULT_PAGE_SIZE + DEFAULT_PAGE_INDEX);
         }
         if (pageQuery.getLength() != null) {
             pageQuery.setPageSize(pageQuery.getLength());
         }
-
+        Map<String, Object> map = new HashMap<String, Object>();
         IPage<ApiDO> page = apiService.selectListPage(apiQuery, pageQuery);
         List<ApiDO> apiDOList = page.getRecords();
-        SimplePageVO<List<ApiDTO>> simplePageVO = new SimplePageVO<>(CodeEnum.DATA_NOT_FOUND);
+        map.put("data", null);
+        map.put("success", false);
         if (!CollectionUtils.isEmpty(apiDOList)) {
             List<ApiDTO> apiDTOList = SimpleConverter.convert(apiDOList, ApiDTO.class);
-            simplePageVO = new SimplePageVO(apiDTOList, page);
+            map.put("success", true);
+            map.put("data", apiDTOList);
         }
-        return simplePageVO;
+        map.put("iTotalRecords", page.getTotal());
+        map.put("iTotalDisplayRecords", page.getTotal());
+        return map;
     }
 
     /**
