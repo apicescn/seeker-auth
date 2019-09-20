@@ -36,7 +36,7 @@ public class IndexController {
      * @param user 登陆用户
      * @return 主页面跳转
      */
-    @RequestMapping(value = "/loginSuccess")
+    @RequestMapping(value = {"/loginSuccess", "/"})
     public String  index(Model model,  Principal user) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         log.debug("当前登陆用户信息为---> " + user);
