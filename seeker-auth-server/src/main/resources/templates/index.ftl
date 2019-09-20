@@ -308,9 +308,9 @@
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <#--<li>
+                    <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>-->
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -395,12 +395,12 @@
         reserved.
     </footer>
 
-    <!-- Control Sidebar -->
+    <!-- Control Sidebar皮肤主题设置 -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+     <#--       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>-->
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -636,13 +636,13 @@
                 text: "用户管理",
                 icon: "fa fa-user-plus",
                 children: [
-                    {
+                    /*{
                         id: "90011",
                         text: "用户登录信息",
                         icon: "fa fa-user",
                         url: "user/userInfo",
                         targetType: "iframe-tab"
-                    },
+                    },*/
                     {
                         id: "90012",
                         text: "用户配置信息",

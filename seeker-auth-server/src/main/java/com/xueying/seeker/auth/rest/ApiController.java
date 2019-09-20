@@ -13,13 +13,12 @@ package com.xueying.seeker.auth.rest;
 import com.xueying.seeker.auth.model.dto.ApiDTO;
 import com.xueying.seeker.auth.model.query.ApiQuery;
 import com.xueying.seeker.auth.model.query.PageQuery;
-import com.xueying.seeker.common.core.model.dto.SimplePageVO;
 import com.xueying.seeker.common.core.model.dto.SimpleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Allen
@@ -31,7 +30,7 @@ public interface ApiController {
     /**
      * 根据ID查询API接口信息的url
      */
-    String GET_API_BY_ID = "/api/api/{id}";
+    String GET_API_BY_ID = "/api/api/id";
 
     /**
      * 获取API接口列表url
@@ -74,7 +73,7 @@ public interface ApiController {
      */
     @ApiOperation(value = "查询API接口列表", notes = "根据条件查询API接口列表",
             protocols = "http,https", httpMethod = "GET")
-    SimplePageVO<List<ApiDTO>> getApiByPage(
+    Map<String, Object> getApiByPage(
             @ApiParam(name = "apiParam", value = "查询条件", required = true) ApiQuery apiQuery, PageQuery pageQuery);
 
     /**

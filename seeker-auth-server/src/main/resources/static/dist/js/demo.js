@@ -51,10 +51,10 @@
   //Layout options
   demo_settings.append(
       "<h4 class='control-sidebar-heading'>"
-      + "Layout Options"
+      + "布局选项"
       + "</h4>"
         //Fixed layout
-      + "<div class='form-group'>"
+      /*+ "<div class='form-group'>"
       + "<label class='control-sidebar-subheading'>"
       + "<input type='checkbox' data-layout='fixed' class='pull-right'/> "
       + "Fixed layout"
@@ -100,7 +100,7 @@
       + "Toggle Right Sidebar Skin"
       + "</label>"
       + "<p>Toggle between dark and light skins for the right sidebar</p>"
-      + "</div>"
+      + "</div>"*/
   );
   var skins_list = $("<ul />", {"class": 'list-unstyled clearfix'});
 
@@ -208,6 +208,7 @@
   demo_settings.append(skins_list);
 
   tab_pane.append(demo_settings);
+
   $("#control-sidebar-home-tab").after(tab_pane);
 
   setup();
