@@ -34,6 +34,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @Order(2)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    /**
+     * 注入自定义处理类
+     */
     @Autowired
     MyAuthenctiationSuccessHandler myAuthenctiationSuccessHandler;
     /**
@@ -77,7 +80,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 关闭csrf
         http.csrf().disable();
         // ResourceServerConfig和WebSecurityConfig都必须配置关于登录页面的配置
-        http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll().successHandler(myAuthenctiationSuccessHandler);
+        http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll()
+                .successHandler(myAuthenctiationSuccessHandler);
         http.authorizeRequests()
                 .antMatchers("/login", "/index").permitAll()
                 .anyRequest().authenticated();

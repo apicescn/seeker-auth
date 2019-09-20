@@ -23,13 +23,15 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.xueying.seeker.auth.rest.constant.ServiceListConstant.*;
+
 /**
  * 通过restTemplate来调用swagger接口数据动态刷入API接口数据
  * @author Allen
  * @date 2019/9/19
  */
-@Component
 @Slf4j
+@Component
 public class RefreshApiService {
 
     /**
@@ -73,17 +75,28 @@ public class RefreshApiService {
             String hostIp = serviceInstance.getHost();
             String serviceName = serviceInstance.getServiceId();
             int servicePort = serviceInstance.getPort();
-            log.info("[服务列表信息] => host-->" + hostIp + ";serviceName-->" + serviceName + ";port-->" + servicePort);
+            log.debug("[服务列表信息] => host-->" + hostIp + ";serviceName-->" + serviceName + ";port-->" + servicePort);
             //TODO 此处需获得各个服务的contextPath，否则无法调用/v2/api-docs
-            String contextPath = "/uaa";
+            String contextPath;
+            switch (serviceName) {
+                case XYSY_SEEKER:
+                    contextPath = SEEKER_CONTEXT_PATH;
+                    break;
+                case SEEKER_AUTH_SERVER:
+                    contextPath = SEEKER_AUTH_CONTEXT_PATH;
+                    break;
+                default:
+                    contextPath = "/";
+                    break;
+            }
             String swaggerJson;
             try {
-                swaggerJson = restTemplate
-                    .getForEntity("http://" + serviceName + ":" + servicePort + contextPath + "/v2/api-docs",
-                        String.class).getBody();
+                String url = "http://" + serviceName + ":" + servicePort + contextPath + "/v2/api-docs";
+                swaggerJson = restTemplate.getForEntity(url, String.class).getBody();
+                log.debug("[调用swaggerApi地址为] =>" + url);
                 apiService.refreshApi(swaggerJson, serviceInstance.getServiceId().toLowerCase());
             } catch (RestClientException error) {
-                log.error("刷入api列表数据：" + error);
+                log.error("[未检测到swagger数据或contextPath异常，刷入api列表数据错误]：" + error);
                 result = false;
             }
         }
