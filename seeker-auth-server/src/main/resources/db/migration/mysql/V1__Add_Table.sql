@@ -98,6 +98,7 @@ CREATE TABLE oauth_approvals (
 /*==============================================================*/
 /* Table: oauth_service_api                 */
 /*==============================================================*/
+DROP TABLE IF EXISTS oauth_service_api;
 CREATE TABLE `oauth_service_api` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `label` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标签',

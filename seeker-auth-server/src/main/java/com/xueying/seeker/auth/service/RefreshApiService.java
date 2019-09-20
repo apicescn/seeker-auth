@@ -28,8 +28,8 @@ import java.util.List;
  * @author Allen
  * @date 2019/9/19
  */
-@Component
 @Slf4j
+@Component
 public class RefreshApiService {
 
     /**
@@ -73,17 +73,28 @@ public class RefreshApiService {
             String hostIp = serviceInstance.getHost();
             String serviceName = serviceInstance.getServiceId();
             int servicePort = serviceInstance.getPort();
-            log.info("[服务列表信息] => host-->" + hostIp + ";serviceName-->" + serviceName + ";port-->" + servicePort);
+            log.debug("[服务列表信息] => host-->" + hostIp + ";serviceName-->" + serviceName + ";port-->" + servicePort);
             //TODO 此处需获得各个服务的contextPath，否则无法调用/v2/api-docs
-            String contextPath = "/uaa";
+            String contextPath;
+            switch (serviceName) {
+                case "xysy-seeker":
+                    contextPath = "/seeker";
+                    break;
+                case "seeker-auth-server":
+                    contextPath = "/uaa";
+                    break;
+                default:
+                    contextPath = "/";
+                    break;
+            }
             String swaggerJson;
             try {
-                swaggerJson = restTemplate
-                    .getForEntity("http://" + serviceName + ":" + servicePort + contextPath + "/v2/api-docs",
-                        String.class).getBody();
+                String url = "http://" + serviceName + ":" + servicePort + contextPath + "/v2/api-docs";
+                swaggerJson = restTemplate.getForEntity(url, String.class).getBody();
+                log.debug("[调用swaggerApi地址为] =>" + url);
                 apiService.refreshApi(swaggerJson, serviceInstance.getServiceId().toLowerCase());
             } catch (RestClientException error) {
-                log.error("刷入api列表数据：" + error);
+                log.error("[未检测到swagger数据或contextPath异常，刷入api列表数据错误]：" + error);
                 result = false;
             }
         }
