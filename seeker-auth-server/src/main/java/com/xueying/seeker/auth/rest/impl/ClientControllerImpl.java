@@ -16,10 +16,8 @@ import com.xueying.seeker.auth.model.entity.ClientDO;
 import com.xueying.seeker.auth.model.query.ClientQuery;
 import com.xueying.seeker.auth.model.query.PageQuery;
 import com.xueying.seeker.auth.rest.ClientController;
-import com.xueying.seeker.auth.rest.constant.RestConstant;
 import com.xueying.seeker.auth.service.ClientService;
 import com.xueying.seeker.common.core.constant.CodeEnum;
-import com.xueying.seeker.common.core.model.dto.SimplePageVO;
 import com.xueying.seeker.common.core.model.dto.SimpleVO;
 import com.xueying.seeker.common.util.SimpleConverter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +30,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.xueying.seeker.auth.rest.constant.RestConstant.DEFAULT_PAGE_INDEX;
+import static com.xueying.seeker.auth.rest.constant.RestConstant.DEFAULT_PAGE_SIZE;
 
 /**
  * 客户端rest接口
@@ -54,8 +57,10 @@ public class ClientControllerImpl implements ClientController {
      */
     @Autowired
     private DiscoveryClient discoveryClient;
+
     /**
      * 根据主键ID查询客户端
+     *
      * @param id ID
      * @return
      */
@@ -98,21 +103,26 @@ public class ClientControllerImpl implements ClientController {
      */
     @Override
     @RequestMapping(value = GET_CLIENT_LIST, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
-    public SimplePageVO<List<ClientDTO>> listClientByPage(@Validated ClientQuery clientQuery, PageQuery pageQuery) {
-        if (pageQuery.getPageIndex() == 0) {
-            pageQuery.setPageIndex(RestConstant.DEFAULT_PAGE_INDEX);
+    public Map<String, Object> listClientByPage(@Validated ClientQuery clientQuery, PageQuery pageQuery) {
+        if (pageQuery.getStart() != null) {
+            pageQuery.setPageIndex(pageQuery.getStart() / DEFAULT_PAGE_SIZE + DEFAULT_PAGE_INDEX);
         }
-        if (pageQuery.getPageSize() == 0) {
-            pageQuery.setPageSize(RestConstant.DEFAULT_PAGE_SIZE);
+        if (pageQuery.getLength() != null) {
+            pageQuery.setPageSize(pageQuery.getLength());
         }
         IPage<ClientDO> page = clientService.listByPage(clientQuery, pageQuery);
         List<ClientDO> clientDOList = page.getRecords();
-        SimplePageVO<List<ClientDTO>> simplePageVO = new SimplePageVO<>(CodeEnum.DATA_NOT_FOUND);
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", null);
+        map.put("success", false);
         if (!CollectionUtils.isEmpty(clientDOList)) {
             List<ClientDTO> clientDTOList = SimpleConverter.convert(clientDOList, ClientDTO.class);
-            simplePageVO = new SimplePageVO(clientDTOList, page);
+            map.put("success", true);
+            map.put("data", clientDTOList);
         }
-        return simplePageVO;
+        map.put("iTotalRecords", page.getTotal());
+        map.put("iTotalDisplayRecords", page.getTotal());
+        return map;
     }
 
     /**
@@ -171,8 +181,8 @@ public class ClientControllerImpl implements ClientController {
 
 
     /**
-     * <P>
-     *     获取服务列表
+     * <p>
+     * 获取服务列表
      * </P>
      *
      * @return Map

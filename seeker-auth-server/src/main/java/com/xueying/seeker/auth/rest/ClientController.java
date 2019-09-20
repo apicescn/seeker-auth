@@ -14,13 +14,13 @@ import com.xueying.seeker.auth.model.dto.ClientDTO;
 import com.xueying.seeker.auth.model.query.ClientQuery;
 import com.xueying.seeker.auth.model.query.PageQuery;
 import com.xueying.seeker.common.core.model.dto.RestDTO;
-import com.xueying.seeker.common.core.model.dto.SimplePageVO;
 import com.xueying.seeker.common.core.model.dto.SimpleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * ClientController接口服务
@@ -88,7 +88,7 @@ public interface ClientController {
      */
     @ApiOperation(value = "根据查询条件查询客户端列表", notes = "根据查询条件查询客户端列表",
             protocols = "http,https", httpMethod = "GET")
-    SimplePageVO<List<ClientDTO>> listClientByPage(
+    Map<String, Object> listClientByPage(
             @ApiParam(name = "clientQuery", value = "查询条件", required = true) ClientQuery clientQuery,
             @ApiParam(name = "pageQuery", value = "分页条件") PageQuery pageQuery);
 
