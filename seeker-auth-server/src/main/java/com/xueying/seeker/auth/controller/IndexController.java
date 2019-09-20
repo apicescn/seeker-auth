@@ -98,7 +98,7 @@ public class IndexController {
      * @return 接口列表
      */
     @RequestMapping("api/apiList")
-    public String apiService(){
+    public String apiService() {
         return "api/api_service";
     }
 }

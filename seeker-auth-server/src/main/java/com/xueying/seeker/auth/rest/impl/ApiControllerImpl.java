@@ -16,7 +16,6 @@ import com.xueying.seeker.auth.model.entity.ApiDO;
 import com.xueying.seeker.auth.model.query.ApiQuery;
 import com.xueying.seeker.auth.model.query.PageQuery;
 import com.xueying.seeker.auth.rest.ApiController;
-import com.xueying.seeker.auth.rest.constant.RestConstant;
 import com.xueying.seeker.auth.service.ApiService;
 import com.xueying.seeker.auth.service.RefreshApiService;
 import com.xueying.seeker.common.core.constant.CodeEnum;
@@ -32,6 +31,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static com.xueying.seeker.auth.rest.constant.RestConstant.DEFAULT_PAGE_SIZE;
 
 /**
  * API接口rest接口
@@ -84,7 +85,7 @@ public class ApiControllerImpl implements ApiController {
     @Override
     public SimplePageVO<List<ApiDTO>> getApiByPage(@Valid ApiQuery apiQuery, PageQuery pageQuery) {
         if (pageQuery.getStart() != null) {
-            pageQuery.setPageIndex(pageQuery.getStart() / 10 + 1);
+            pageQuery.setPageIndex(pageQuery.getStart() / DEFAULT_PAGE_SIZE + 1);
         }
         if (pageQuery.getLength() != null) {
             pageQuery.setPageSize(pageQuery.getLength());
@@ -105,7 +106,8 @@ public class ApiControllerImpl implements ApiController {
      *
      * @return 数据刷新是否成功
      */
-    @RequestMapping(value = GET_API_REFRESH_AUTO, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
+    @RequestMapping(value = GET_API_REFRESH_AUTO, produces = {MediaType.APPLICATION_JSON_VALUE},
+            method = RequestMethod.POST)
     @Override
     public SimpleVO autoRefreshApi() {
         SimpleVO simpleVO = new SimpleVO(CodeEnum.SUCCESS);
