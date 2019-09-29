@@ -475,6 +475,8 @@
             <url>http://gitlab.whxueying.com:8081/artifactory/libs-snapshot-local</url>
             <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
             </snapshots>
         </repository>
         <!--docker单元测试-->
