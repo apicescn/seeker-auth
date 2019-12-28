@@ -63,9 +63,10 @@ userdetails:
       defaultClient: true
       contextPath: seeker
       desc: 默认中台userdetails服务配置
-#  - application: seeker-member
-#    clientId: member
-#    desc: 小程序会员userdetails服务配置
+    - application: seeker-wechat-admin
+      clientId: wechat
+      contextPath: wechat
+      desc: 微信会员userdetails服务配置
 
 feign:
   client:
