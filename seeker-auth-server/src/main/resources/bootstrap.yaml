@@ -27,7 +27,7 @@ spring:
         group: DEV_GROUP
         file-extension: yaml
       discovery:
-        enabled: false
+        enabled: true
         server-addr: ${maven_nacos.ip}:${maven_nacos.port}
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
