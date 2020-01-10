@@ -15,7 +15,8 @@ spring:
       minEvictableIdleTimeMillis: 180000
       testOnBorrow: false
       testWhileIdle: true
-      removeAbandoned: true
+      #此属性在生产中需关闭
+      removeAbandoned: false
       removeAbandonedTimeout: 1800
       logAbandoned: true
       poolPreparedStatements: true
