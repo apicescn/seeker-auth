@@ -60,6 +60,7 @@
         <module>seeker-auth-server</module>
         <module>seeker-auth-client</module>
         <module>seeker-auth-common</module>
+        <module>seeker-auth-feign</module>
     </modules>
     <dependencyManagement>
         <dependencies>
