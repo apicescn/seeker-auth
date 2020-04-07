@@ -24,8 +24,7 @@
         <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <aspectjweaver.version>1.9.4</aspectjweaver.version>
-        <mybatis-spring-boot-starter.version>2.0.1</mybatis-spring-boot-starter.version>
-        <mybatisplus-boot-starter.version>3.1.1</mybatisplus-boot-starter.version>
+        <mybatisplus-boot-starter.version>3.3.1</mybatisplus-boot-starter.version>
         <mybatisplus.version>3.1.1</mybatisplus.version>
         <druid.version>1.1.16</druid.version>
         <guava.version>27.1-jre</guava.version>
@@ -222,11 +221,6 @@
             </dependency>
             <!--mybatis-->
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis-spring-boot-starter.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatisplus-boot-starter.version}</version>
@@ -275,12 +269,6 @@
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>findbugs</artifactId>
                 <version>${findbugs.version}</version>
-            </dependency>
-            <!-- hateoas 开发Rest服务-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-hateoas</artifactId>
-                <version>${spring-boot-starter-hateoas.version}</version>
             </dependency>
             <!--注解反射-->
             <dependency>
@@ -375,21 +363,6 @@
                             <exclude>**/integrate/**</exclude>
                         </excludes>
                     </configuration>
-                </plugin>
-                <!--创建Maven插件描述符-->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-plugin-plugin</artifactId>
-                    <version>${maven-plugin-plugin.version}</version>
-                    <configuration>
-                        <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>default-descriptor</id>
-                            <phase>process-classes</phase>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
