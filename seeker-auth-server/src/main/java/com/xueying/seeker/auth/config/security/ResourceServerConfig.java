@@ -33,6 +33,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private static final String RESOURCE_ID = "seeker-auth-server";
 
     /**
+     * 允许访问地址列表
+     */
+    private static final String[] RELEASE_WHITELIST = {
+            "/swagger**",
+            "/v2/api-docs/**"
+    };
+    /**
      * 配置资源ID
      *
      * @param resources
@@ -52,7 +59,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         // ResourceServerConfig和WebSecurityConfig都必须配置关于登录页面的配置
         http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll();
-        http.authorizeRequests().antMatchers("/swagger**", "/v2/api-docs/**").permitAll()
+        http.authorizeRequests().antMatchers(RELEASE_WHITELIST).permitAll()
                 .anyRequest().authenticated();
     }
 }

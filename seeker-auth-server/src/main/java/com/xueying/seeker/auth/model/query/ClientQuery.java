@@ -33,6 +33,9 @@ public class ClientQuery {
     @ApiParam(value = "服务ID", example = "openapi-service")
     private String resourceIds;
 
+    /** 客户端密码 */
+    @ApiParam(value = "客户端密码", example = "$10$7PtegA6OsLb402nVZ1C4oOTFvgE42kfnBuDuSGY")
+    private String clientSecret;
     /**
      * 客户端访问域
      */
@@ -44,5 +47,8 @@ public class ClientQuery {
      */
     @ApiParam(value = "授权类型", example = "authorization_code")
     private String authorizedGrantTypes;
+
+    /** access_token初始超期时间 */
+    private String accessTokenValidity;
 
 }

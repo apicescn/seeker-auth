@@ -68,6 +68,10 @@ userdetails:
       clientId: wechat
       contextPath: wechat
       desc: 微信会员userdetails服务配置
+    - application: seeker-open-api
+      clientId: openapi
+      contextPath: openapi
+      desc: 开放平台userdetails服务配置
 
 feign:
   client:

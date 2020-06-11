@@ -95,7 +95,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色编码</label>
             <div class="layui-input-block">
-                <input type="text" name="authorities" required lay-verify="required" placeholder="角色编码(默认:ADMIN)"
+                <input type="text" name="authorities" placeholder="角色编码(如:ADMIN)"
                        class="layui-input" id="authorities" style="width:200px">
             </div>
         </div>
@@ -263,15 +263,15 @@
                 var loading = layer.load(0, {shade: false});
                 //获取checkbox[name='scope']的值
                 var arr = new Array();
-                /*$("input:checkbox[id='scope']:checked").each(function (i) {
-                    arr[i] = $(this).val();
-                });*/
-                $("[id='scope']:checkbox").each(function (i) {
+                $("input[name='scope']:checked").each(function (i) {
+                    arr[i] = $(this).attr("title");
+                });
+                /*$("input[name='scope']:checkbox").each(function (i) {
                     if ($(this).is(":checked")) {
                         //arr.push($(this).attr("title"));
-                        arr[i] = $(this).attr("title");
+                        arr[i] = $(this).attr("value");
                     }
-                });
+                });*/
                 data.field.scope = arr.join(",");//将数组合并成字符串
                 var data1 = data.field;
                 $.ajax({
