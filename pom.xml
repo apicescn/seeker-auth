@@ -27,7 +27,7 @@
         <mybatisplus-boot-starter.version>3.3.1</mybatisplus-boot-starter.version>
         <mybatisplus.version>3.3.1</mybatisplus.version>
         <druid.version>1.1.20</druid.version>
-        <guava.version>27.1-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <feign.version>10.2.3</feign.version>
         <httpclient.version>4.5.9</httpclient.version>
         <javafaker.version>0.18</javafaker.version>
