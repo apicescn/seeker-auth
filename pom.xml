@@ -29,7 +29,7 @@
         <druid.version>1.1.20</druid.version>
         <guava.version>27.1-jre</guava.version>
         <feign.version>10.2.3</feign.version>
-        <httpclient.version>4.5.9</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <javafaker.version>0.18</javafaker.version>
         <findbugs.version>3.0.1</findbugs.version>
         <spring-security.version>5.1.5.RELEASE</spring-security.version>
