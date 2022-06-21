@@ -21,7 +21,7 @@
         <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
         <spring.cloud.version>Greenwich.RELEASE</spring.cloud.version>
         <spring.cloud.starter.version>2.1.2.RELEASE</spring.cloud.starter.version>
-        <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <aspectjweaver.version>1.9.4</aspectjweaver.version>
         <mybatisplus-boot-starter.version>3.3.1</mybatisplus-boot-starter.version>
